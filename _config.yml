@@ -9,6 +9,7 @@ description:
 author: Rajeesh C V
 language:
 timezone:
+disqus_shortname: rajeeshcv
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
