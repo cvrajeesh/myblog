@@ -7,7 +7,7 @@ The title might be misleading but I will explain why we shouldn’t use the Requ
 
 If you are writing an web application and you don’t know the environment of the server where it is getting deployed, then it is better not to use `Request.Url` it directly.
 
-![](http://rajeesh.cdn.rhyble.com/images/2011/10/20111030073847_image_2.png)
+![](http://cdn.rajeeshcv.com/images/2011/10/20111030073847_image_2.png)
 
 This blog is running on a {% post_link New-Outlook–Rolling-out-My-Own-Blog-Engine "home grown blog engine" %}, which is written using asp.net MVC 3. For implementing some of the functionalities like generating sitemap.xml I had to get the root of the url(i.e. without any path). So I used the `Request.Url.GetLeftPart(UriPartial.Authority)` method and it worked perfectly on my local machine even when it is deployed my local machine IIS server. When I deployed my blog engine to [Appharbor] environment, the generated sitemap.xml has a URL with port number like *www.rajeeshcv.com:4566* instead of just *www.rajeeshcv.com*.
 
@@ -15,7 +15,7 @@ This blog is running on a {% post_link New-Outlook–Rolling-out-My-Own-Blog-Eng
 
 After googling for some time I came across the solution posted [Appharbor] knowledge base - [workaround for generating absolute urls without port number][1]. In their environment there are load balancers which sits in front on the webserver, which uses a specific port number for contacting the server where the application is running. Below is a simple pictorial representation of that
 
-![Network with load balancer](http://rajeesh.cdn.rhyble.com/images/2011/10/20111030073858_image_4.png)
+![Network with load balancer](http://cdn.rajeeshcv.com/images/2011/10/20111030073858_image_4.png)
 
 So whenever we try to get `Request.Url`, application will get the actual request Url received by that webserver, which will have the port number also.
 

@@ -39,6 +39,6 @@ public void Can_Reverse_A_Text(string actual, string expected)
 
 This gives a clean way for testing different possibilities, all these shown in the NUnit test runner as different test cases like below.
 
-![NUnit Screenshot](http://rajeesh.cdn.rhyble.com/images/2009/12/image-thumb.png)
+![NUnit Screenshot](http://cdn.rajeeshcv.com/images/2009/12/image-thumb.png)
 
 Hope this will help in some way or other

@@ -13,4 +13,4 @@ In web development, Comet is a neologism to describe a web application model in 
 
 Last few days, I was reading about this technology and thought about sharing the information with you all. Please find the attached sample application which demonstrates how comet works using Asp.Net (Note: Right now it works only in firefox. Fixes or patches to make it work in IE/Safari.. or all the browsers in this world are welcome J )
 
-> Please download the demo from [here](http://rajeesh.cdn.rhyble.com/download/Comet.zip)
+> Please download the demo from [here](http://cdn.rajeeshcv.com/download/Comet.zip)

@@ -59,9 +59,9 @@ Below is the sample code
 ###Extra bits
 In the above code you can see that I have placed link, when user click on that link a message is shown with the server time. So behind an asynchronous request is send to the server in this format *http://[sitename]/[MethodName]*. Server in turn returns the result as JSON back to the client. Here is a screen shot from the firebug
 
-![Firebug headers](http://rajeesh.cdn.rhyble.com/images/2008/10/image.png)
+![Firebug headers](http://cdn.rajeeshcv.com/images/2008/10/image.png)
 
-![Firebug response](http://rajeesh.cdn.rhyble.com/images/2008/10/image1.png)
+![Firebug response](http://cdn.rajeeshcv.com/images/2008/10/image1.png)
 
 There is an optimization we have do here - you can see that, by default the request is a POST request, but in our case a POST request is heavy because we could have achieved the same using a GET request ([Difference between POST and GET](http://www.cs.tut.fi/~jkorpela/forms/methods.html)).
 
@@ -78,4 +78,4 @@ public static string GetTime()
 
 After this you can see that, request is changed to a GET request
 
-![Firebug response after changing to GET](http://rajeesh.cdn.rhyble.com/images/2008/10/image2.png)
+![Firebug response after changing to GET](http://cdn.rajeeshcv.com/images/2008/10/image2.png)

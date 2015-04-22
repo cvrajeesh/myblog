@@ -12,7 +12,7 @@ When do a move under SVN you need to make sure that the history is not lost, so 
 
 Below is a screen shot of my existing repository and I want to move the **configuration** directory to the **project**  directory without loosing the history.
 
-![SVN repository structure](http://rajeesh.cdn.rhyble.com/images/2011/11/20111115081425_Screen1_thumb.png)
+![SVN repository structure](http://cdn.rajeeshcv.com/images/2011/11/20111115081425_Screen1_thumb.png)
 
 First of of all this will work only for the versioned items, so please commit your changes to the directory you want to move before doing this. The steps explained below assumes that you are using Tortoise SVN
 
@@ -21,12 +21,12 @@ Here are the steps
 1. Right click on the directory you want to move
 2. Drag and drop on to the directory where you want to move this.
 3. Choose the **SVN Mover Versioned item(s) here** item from the context menu.
-   ![Context Menu with move](http://rajeesh.cdn.rhyble.com/images/2011/11/20111115081432_Screen2_thumb.png)
+   ![Context Menu with move](http://cdn.rajeeshcv.com/images/2011/11/20111115081432_Screen2_thumb.png)
 4. Now commit the changes back to the repository.
 
 Don’t forget to uncheck *Stop on copy/rename* option in the *Log messages* dialog if you are trying to see the history of the moved directory.
 
-![Move configuration](http://rajeesh.cdn.rhyble.com/images/2011/11/20111115081442_Screen3_thumb.png)
+![Move configuration](http://cdn.rajeeshcv.com/images/2011/11/20111115081442_Screen3_thumb.png)
 
 ###Scenario 2 – Moving directories across SVN repositories
 

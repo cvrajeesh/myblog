@@ -1,6 +1,8 @@
 # Header
 menu:
   Home: /
+  About: /about
+  Projects: /projects
   Archives: /archives
 rss: /atom.xml
 
@@ -18,9 +20,9 @@ widgets:
 - recent_posts
 
 # Miscellaneous
-google_analytics:
+google_analytics: UA-647217-9
 favicon: /favicon.png
-twitter:
-google_plus:
+twitter: cvrajeesh
+google_plus: https://www.google.com/+RajeeshCV
 fb_admins:
 fb_app_id:
