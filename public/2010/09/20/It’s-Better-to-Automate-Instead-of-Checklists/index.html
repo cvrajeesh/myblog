@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>It’s Better to Automate, Instead of Checklists | rajeesh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="In my day to day activities I have seen many checklists like
+
+Code review checklist
+Source control check-in checklist
+Developer checklist
+
+All these are good because it helps to reduce failures but do">
+<meta property="og:type" content="article">
+<meta property="og:title" content="It’s Better to Automate, Instead of Checklists">
+<meta property="og:url" content="http://rajeeshcv.com/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/index.html">
+<meta property="og:site_name" content="rajeesh">
+<meta property="og:description" content="In my day to day activities I have seen many checklists like
+
+Code review checklist
+Source control check-in checklist
+Developer checklist
+
+All these are good because it helps to reduce failures but do">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="It’s Better to Automate, Instead of Checklists">
+<meta name="twitter:description" content="In my day to day activities I have seen many checklists like
+
+Code review checklist
+Source control check-in checklist
+Developer checklist
+
+All these are good because it helps to reduce failures but do">
+<meta name="twitter:creator" content="@cvrajeesh">
+<link rel="publisher" href="https://www.google.com/+RajeeshCV">
+  
+    <link rel="alternative" href="/atom.xml" title="rajeesh" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-647217-9', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rajeesh</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Sharing My Thoughts</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://rajeeshcv.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-It’s-Better-to-Automate-Instead-of-Checklists" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/" class="article-date">
+  <time datetime="2010-09-20T07:16:38.000Z" itemprop="datePublished">2010-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      It’s Better to Automate, Instead of Checklists
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In my day to day activities I have seen many checklists like</p>
+<ol>
+<li><a href="http://en.wikipedia.org/wiki/Code_review" target="_blank" rel="external">Code review</a> checklist</li>
+<li>Source control check-in checklist</li>
+<li>Developer checklist</li>
+</ol>
+<p>All these are good because it helps to reduce failures but does everyone follow these all the time?. Sometimes I (or any developer) forgot to go through the checklist due to many reasons like time constraints, lack of concentration etc… and I don’t think we should blame anyone for missing this because - <em>We all are humans and we tends to forget</em>.</p>
+<p>Only way we could reduce these mistakes is to automate!!! wherever possible. In my current project, all the aspx page should have direction(dir) attribute in the html tag as part of the localization work. As usual an email with  checklist for localizing an aspx page was sent to all the developers, out of that one item was to include <code>dir</code> attribute whenever they add new aspx file.</p>
+<p>Everybody followed this in the initial stages but later we started forgetting about this requirement, which caused extra hours of effort to fix it in all the pages.</p>
+<p>It could have been avoided if we had a automated process which verifies this. In order to automate, one way is to write a custom MSBuild task which could verify whether a aspx file has <code>dir</code> attribute, if it doesn’t fails build (this whole idea came from <a href="http://blogs.msdn.com/b/simonince/archive/2009/07/10/enforcing-unobtrusive-javascript.aspx" target="_blank" rel="external">http://blogs.msdn.com/b/simonince/archive/2009/07/10/enforcing-unobtrusive-javascript.aspx</a>). If you want to learn about writing a custom MSBuild task, I suggest <a href="http://msdn.microsoft.com/en-us/library/t9883dzc.aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/t9883dzc.aspx</a>.</p>
+<p>So here is the  code which creates this custom MS Build task</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> HtmlAgilityPack;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Build.Framework;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Build.Utilities;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">StaticFileAnalysisTask</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="xmlDocTag">///</span> Custom MSBuild task which analyse the HTML code validation.</span></span><br><span class="line">    <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HTMLCodingStandard</span> : <span class="title">Task</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="preprocessor">#<span class="keyword">region</span> Private fields</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> Variable that holds the status of this task execution.</span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">bool</span> _success;</span><br><span class="line"></span><br><span class="line">        <span class="preprocessor">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">        <span class="preprocessor">#<span class="keyword">region</span> Public properties</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> Gets or sets the source file list.</span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;value&gt;</span>The source file list.<span class="xmlDocTag">&lt;/value&gt;</span></span></span><br><span class="line">        [Required]</span><br><span class="line">        <span class="keyword">public</span> ITaskItem[] SourceFiles &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> Gets or sets the list of files to be excluded.</span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;value&gt;</span>The excluded files.<span class="xmlDocTag">&lt;/value&gt;</span></span></span><br><span class="line">        <span class="keyword">public</span> ITaskItem[] ExcludeFiles &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="preprocessor">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> Executes this task.</span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;returns&gt;</span><span class="xmlDocTag">&lt;c&gt;</span>true<span class="xmlDocTag">&lt;/c&gt;</span> if task executed successfully; Otherwise, <span class="xmlDocTag">&lt;c&gt;</span>false<span class="xmlDocTag">&lt;/c&gt;</span>.<span class="xmlDocTag">&lt;/returns&gt;</span></span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">bool</span> <span class="title">Execute</span><span class="params">()</span></span><br><span class="line">        </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>._success = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">foreach</span> (ITaskItem current <span class="keyword">in</span> SourceFiles)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// If the items is in the exluded list, then skip</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>.IsInExlcudedList(current))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">string</span> path = current.ItemSpec;</span><br><span class="line">                <span class="keyword">if</span> (path.EndsWith(<span class="string">".aspx"</span>))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">this</span>.ValidateFile(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>._success;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> Method that is responsible for validating the file.</span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;param name="path"&gt;</span>The full path to the file.<span class="xmlDocTag">&lt;/param&gt;</span></span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ValidateFile</span><span class="params">(<span class="keyword">string</span> path)</span></span><br><span class="line">        </span>&#123;</span><br><span class="line">            HtmlDocument htmlDocument = <span class="keyword">new</span> HtmlDocument();</span><br><span class="line">            htmlDocument.Load(path);</span><br><span class="line">            HtmlNode node = htmlDocument.DocumentNode.SelectSingleNode(<span class="string">"//html"</span>);</span><br><span class="line">            <span class="keyword">if</span>(node != <span class="keyword">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(!node.Attributes.Contains(<span class="string">"dir"</span>))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">this</span>.BuildEngine.LogErrorEvent(<span class="keyword">new</span> BuildErrorEventArgs(</span><br><span class="line">                        <span class="string">"Invalid HTML coding standard"</span>,</span><br><span class="line">                        <span class="string">"SFAT-HTML-1"</span>,</span><br><span class="line">                        path,</span><br><span class="line">                        node.Line,</span><br><span class="line">                        node.LinePosition,</span><br><span class="line">                        node.LinePosition,</span><br><span class="line">                        node.LinePosition + node.OuterHtml.Length,</span><br><span class="line">                        <span class="string">"SFAT-HTML-1: Direction(dir) tag is missing"</span>,</span><br><span class="line">                        <span class="keyword">null</span>,</span><br><span class="line">                        <span class="string">"HTMLCodingStandardTask"</span></span><br><span class="line">                        ));</span><br><span class="line">                    <span class="keyword">this</span>._success = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> Determines whether an item is in the excluded list.</span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;param name="taskItem"&gt;</span>The task item which needs to checked.<span class="xmlDocTag">&lt;/param&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;returns&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span>     <span class="xmlDocTag">&lt;c&gt;</span>true<span class="xmlDocTag">&lt;/c&gt;</span> if item is in exlcuded list; otherwise, <span class="xmlDocTag">&lt;c&gt;</span>false<span class="xmlDocTag">&lt;/c&gt;</span>.</span></span><br><span class="line">        <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/returns&gt;</span></span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">bool</span> <span class="title">IsInExlcudedList</span><span class="params">(ITaskItem taskItem)</span></span><br><span class="line">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.ExcludeFiles == <span class="keyword">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.ExcludeFiles.Any(x =&gt; x.ItemSpec == taskItem.ItemSpec);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>For including this in the your web project, open the project file in a text editor and add the below lines</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">UsingTask</span> <span class="attribute">AssemblyFile</span>=<span class="value">"..\output\StaticFileAnalysisTask.dll"</span> <span class="attribute">TaskName</span>=<span class="value">"HTMLCodingStandard"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">Target</span> <span class="attribute">Name</span>=<span class="value">"BeforeBuild"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">HTMLCodingStandard</span> <span class="attribute">SourceFiles</span>=<span class="value">"@(Content)"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">Target</span>&gt;</span> If you want to exclude any files from this verification process, then define an ItemGroup</span><br><span class="line"><span class="tag">&lt;<span class="title">ItemGroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">ExcludedContents</span> <span class="attribute">Include</span>=<span class="value">"WebForm2.aspx"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">ItemGroup</span>&gt;</span> and add that to the build action like below</span><br><span class="line"> <span class="tag">&lt;<span class="title">UsingTask</span> <span class="attribute">AssemblyFile</span>=<span class="value">"..\output\StaticFileAnalysisTask.dll"</span> <span class="attribute">TaskName</span>=<span class="value">"HTMLCodingStandard"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">Target</span> <span class="attribute">Name</span>=<span class="value">"BeforeBuild"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">HTMLCodingStandard</span> <span class="attribute">SourceFiles</span>=<span class="value">"@(Content)"</span> <span class="attribute">ExcludeFiles</span>=<span class="value">"@(ExcludedContents)"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">Target</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Hope this helps you.</p>
+<blockquote>
+<p>Download code sample from <a href="http://cdn.rajeeshcv.com/download/TestWebApplication.zip" target="_blank" rel="external">here</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/" data-id="ci9e0wvje000iy4ktc2ry4cvb" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2010/12/27/Create-a-Live-Aquarium-Wallpaper-in-Android/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Create a Live Aquarium Wallpaper in Android
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2010/06/01/User-Experience-Makes-Applications-Stand-out/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">User Experience Makes Applications Stand-out</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/">EmberJS - How to Detect User Inactivity</a>
+          </li>
+        
+          <li>
+            <a href="/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/">Visual Studio : Debugging Silverlight Application with Chrome and Firefox</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/">One of the Top E-Commerce Website in India Stores Passwords Incorrectly</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/">Automating WYSIWYG Editors using Selenium Web Driver</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Rajeesh C V<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'rajeeshcv';
+  
+  var disqus_url = 'http://rajeeshcv.com/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

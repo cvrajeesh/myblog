@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Automating WYSIWYG Editors using Selenium Web Driver | rajeesh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Automating web application using selenium for acceptance/integration tests is very easy. Recently I have faced few issues when automating a page with a JavaScript based WYSIWYG editors.
+The reason why">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Automating WYSIWYG Editors using Selenium Web Driver">
+<meta property="og:url" content="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/index.html">
+<meta property="og:site_name" content="rajeesh">
+<meta property="og:description" content="Automating web application using selenium for acceptance/integration tests is very easy. Recently I have faced few issues when automating a page with a JavaScript based WYSIWYG editors.
+The reason why">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Automating WYSIWYG Editors using Selenium Web Driver">
+<meta name="twitter:description" content="Automating web application using selenium for acceptance/integration tests is very easy. Recently I have faced few issues when automating a page with a JavaScript based WYSIWYG editors.
+The reason why">
+<meta name="twitter:creator" content="@cvrajeesh">
+<link rel="publisher" href="https://www.google.com/+RajeeshCV">
+  
+    <link rel="alternative" href="/atom.xml" title="rajeesh" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-647217-9', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rajeesh</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Sharing My Thoughts</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://rajeeshcv.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Automating-WYSIWYG-Editors-using-Selenium-Web-Driver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/" class="article-date">
+  <time datetime="2012-12-01T06:58:23.000Z" itemprop="datePublished">2012-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Automating WYSIWYG Editors using Selenium Web Driver
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Automating web application using <a href="https://github.com/SeleniumHQ/selenium/wiki/Getting-Started" target="_blank" rel="external">selenium for acceptance/integration tests</a> is very easy. Recently I have faced few issues when automating a page with a JavaScript based <a href="http://en.wikipedia.org/wiki/WYSIWYG" target="_blank" rel="external">WYSIWYG</a> editors.</p>
+<p>The reason why it is hard because most of these editors create a new editable HTML document inside an iframe. There are two ways I aware that you can set text on these editors</p>
+<ol>
+<li>Executing a JavaScript code in the current page</li>
+<li>Sending keys on the editable iframe</li>
+</ol>
+<p>Here is how I automated two <a href="http://en.wikipedia.org/wiki/WYSIWYG" target="_blank" rel="external">WYSIWYG</a> editors using selenium web driver.</p>
+<h3 id="bootstrap-wysihtml5">bootstrap-wysihtml5</h3><p>Website: <a href="http://jhollingworth.github.io/bootstrap-wysihtml5/" target="_blank" rel="external">http://jhollingworth.github.io/bootstrap-wysihtml5/</a></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">SetBootstrapWysihtml5Content</span><span class="params">(IWebElement textArea, <span class="keyword">string</span> content)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">string</span> script = <span class="keyword">string</span>.Format(<span class="string">@"$('#&#123;0&#125;').data('wysihtml5').editor.setValue('&#123;1&#125;');"</span>, textArea.GetAttribute(<span class="string">"id"</span>), content);</span><br><span class="line">    ((IJavaScriptExecutor)<span class="keyword">this</span>.WebDriver).ExecuteScript(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>What this method does is, it accepts the <code>TextArea</code> web element which you are converting to an editor and the actual content to be set. Then it executes a piece of JavaScript on the current <code>WebDriver</code> context.</p>
+<p>For e.g. if you have a TextArea element with id <code>summary</code> then executing below JavaScript statement will insert a <code>h1</code> tag  with “Test” to the editor</p>
+<p><code>$(&#39;#summary&#39;).data(&#39;wysihtml5&#39;).editor.setValue(&#39;&lt;h1&gt;Test&lt;/h1&gt;&#39;);</code></p>
+<h3 id="TinyMCE">TinyMCE</h3><p>Website: <a href="http://www.tinymce.com/" target="_blank" rel="external">http://www.tinymce.com/</a></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">SetTinyMCEContent</span><span class="params">(IWebElement textArea, <span class="keyword">string</span> content)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">string</span> textAreaId = textArea.GetAttribute(<span class="string">"id"</span>);</span><br><span class="line">    <span class="keyword">string</span> frameId = <span class="keyword">string</span>.Format(<span class="string">"&#123;0&#125;_ifr"</span>, textAreaId);</span><br><span class="line">    <span class="keyword">var</span> frame = <span class="keyword">this</span>.WebDriver.FindElement(By.Id(frameId));</span><br><span class="line">    <span class="keyword">this</span>.WebDriver.SwitchTo().Frame(frame);</span><br><span class="line">    ((IJavaScriptExecutor)<span class="keyword">this</span>.WebDriver).ExecuteScript(<span class="string">"document.body.innerHTML = '"</span> + content + <span class="string">"'"</span>);</span><br><span class="line">    <span class="keyword">this</span>.WebDriver.SwitchTo().DefaultContent();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This method also accepts the <code>TextArea</code> web element which you are converting to an editor and the actual content to be set. Then it finds the corresponding <code>iframe</code> and set the <code>innerHTML</code> by executing a JavaScript statement.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/" data-id="ci9e0wvm4000wy4ktc1cdxsii" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          One of the Top E-Commerce Website in India Stores Passwords Incorrectly
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/08/02/Introducing-SourceCodeReader/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Introducing SourceCodeReader</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/">EmberJS - How to Detect User Inactivity</a>
+          </li>
+        
+          <li>
+            <a href="/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/">Visual Studio : Debugging Silverlight Application with Chrome and Firefox</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/">One of the Top E-Commerce Website in India Stores Passwords Incorrectly</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/">Automating WYSIWYG Editors using Selenium Web Driver</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Rajeesh C V<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'rajeeshcv';
+  
+  var disqus_url = 'http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Introducing SourceCodeReader | rajeesh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Have you ever tried to understand a project just by going through the source code?
+That’s how I do most of the time, till now I haven’t seen any up to date documentation which gives the clear understa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introducing SourceCodeReader">
+<meta property="og:url" content="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/index.html">
+<meta property="og:site_name" content="rajeesh">
+<meta property="og:description" content="Have you ever tried to understand a project just by going through the source code?
+That’s how I do most of the time, till now I haven’t seen any up to date documentation which gives the clear understa">
+<meta property="og:image" content="http://cdn.rajeeshcv.com/images/2012/08/20120802065851_image_thumb.png">
+<meta property="og:image" content="http://cdn.rajeeshcv.com/images/2012/08/20120802065857_image_thumb_2.png">
+<meta property="og:image" content="http://cdn.rajeeshcv.com/images/2012/08/20120802065903_image_thumb_1.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Introducing SourceCodeReader">
+<meta name="twitter:description" content="Have you ever tried to understand a project just by going through the source code?
+That’s how I do most of the time, till now I haven’t seen any up to date documentation which gives the clear understa">
+<meta name="twitter:creator" content="@cvrajeesh">
+<link rel="publisher" href="https://www.google.com/+RajeeshCV">
+  
+    <link rel="alternative" href="/atom.xml" title="rajeesh" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-647217-9', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rajeesh</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Sharing My Thoughts</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://rajeeshcv.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Introducing-SourceCodeReader" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/02/Introducing-SourceCodeReader/" class="article-date">
+  <time datetime="2012-08-02T06:51:32.000Z" itemprop="datePublished">2012-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Introducing SourceCodeReader
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Have you ever tried to understand a project just by going through the source code?</p>
+<p>That’s how I do most of the time, till now I haven’t seen any up to date documentation which gives the clear understanding of how the code is implemented. In reality after a certain period during the development, documentation goes out of sync with the source code. So some one joins the project lately has only one way to understand the project <em>Go through the source code</em></p>
+<p>Sometimes I go through the open source projects hosted on either Github, Codeplex or Google code. All the hosting site provide you with a user interface for browsing through the source code with syntax highlighting support, which is nice. The problem I had with this is – if I see a object creation statement, method call there is no way for me to find out how it is implemented other than manually going through the files and finding it out.</p>
+<p>Most of the full blown editors provide a feature where you can navigate to the implementation directly from where it is used for e.g. Microsoft Visual Studio provides <em>Go To Definition</em> feature. I find this feature very much useful for understanding the project. Only draw back with this approach is you have to completely get the latest version of source code to your local machine.</p>
+<p><a href="http://sourcecodereader.apphb.com/" target="_blank" rel="external">SourceCodeReader</a> is trying solve this navigation problem on the web. With this application you can open a project and browse through the files with code navigation support.</p>
+<p>Source code for this project can be found at <a href="https://github.com/cvrajeesh/SourceCodeReader" target="_blank" rel="external">https://github.com/cvrajeesh/SourceCodeReader</a></p>
+<h3 id="Limitations">Limitations</h3><ol>
+<li>Now supports only Github code repository</li>
+<li>Only supports .Net C#  projects, other type of projects also works without code navigation support</li>
+</ol>
+<h3 id="How_to_use_this_application">How to use this application</h3><p>Go to <a href="http://sourcecodereader.apphb.com/" target="_blank" rel="external">SourceCodeReader</a> and enter the URL of a C# project on Github</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/08/20120802065851_image_thumb.png" alt="SourceCodeReader home page"></p>
+<p>Once you have entered a Github project link and open the project, it get the source code from the Github and present you with file browser.</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/08/20120802065857_image_thumb_2.png" alt="SourceCodeReader project directory"></p>
+<p>When you navigate to a C# file you will be able to see clickable links for identifiers which takes you the file location where that is declared.</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/08/20120802065903_image_thumb_1.png" alt="SourceCodeReader Go To Definition feature"></p>
+<p><strong>Sample projects :</strong></p>
+<ul>
+<li><a href="http://sourcecodereader.apphb.com/#/open/cvrajeesh/SourceCodeReader" target="_blank" rel="external">http://sourcecodereader.apphb.com/#/open/cvrajeesh/SourceCodeReader</a></li>
+<li><a href="http://sourcecodereader.apphb.com/#/open/ayende/ravendb" target="_blank" rel="external">http://sourcecodereader.apphb.com/#/open/ayende/ravendb</a></li>
+</ul>
+<p>Hope you liked this idea, please provide me with your valuable feedback.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/" data-id="ci9e0wvjj000jy4ktq2qpsvfl" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Automating WYSIWYG Editors using Selenium Web Driver
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Integrating BrowserID In To Your ASP.NET MVC Application</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/">EmberJS - How to Detect User Inactivity</a>
+          </li>
+        
+          <li>
+            <a href="/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/">Visual Studio : Debugging Silverlight Application with Chrome and Firefox</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/">One of the Top E-Commerce Website in India Stores Passwords Incorrectly</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/">Automating WYSIWYG Editors using Selenium Web Driver</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Rajeesh C V<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'rajeeshcv';
+  
+  var disqus_url = 'http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

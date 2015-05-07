@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>rajeesh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="rajeesh">
+<meta property="og:url" content="http://rajeeshcv.com/index.html">
+<meta property="og:site_name" content="rajeesh">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rajeesh">
+<meta name="twitter:description">
+<meta name="twitter:creator" content="@cvrajeesh">
+<link rel="publisher" href="https://www.google.com/+RajeeshCV">
+  
+    <link rel="alternative" href="/atom.xml" title="rajeesh" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-647217-9', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">rajeesh</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Sharing My Thoughts</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://rajeeshcv.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-EmberJS-Error-Logging-in-Production" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/" class="article-date">
+  <time datetime="2014-06-22T07:22:57.000Z" itemprop="datePublished">2014-06-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In order to log all errors in an <a href="http://emberjs.com/" target="_blank" rel="external">EmberJS</a> application, <a href="http://emberjs.com/" target="_blank" rel="external">EmberJS</a> provides a global hook called <code>onerror</code></p>
+<p>Here is a link to the official documentation - <a href="http://emberjs.com/guides/understanding-ember/debugging/#toc_implement-an-ember-onerror-hook-to-log-all-errors-in-production" target="_blank" rel="external">http://emberjs.com/guides/understanding-ember/debugging/#toc_implement-an-ember-onerror-hook-to-log-all-errors-in-production</a></p>
+<p>Code sample from the documentation (v 1.5.1) look like this</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Ember.onerror = <span class="function"><span class="keyword">function</span><span class="params">(error)</span> </span>&#123;</span><br><span class="line">  Em.$.ajax(<span class="string">'/error-notification'</span>, &#123;</span><br><span class="line">    type: <span class="string">'POST'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      stack: error.stack,</span><br><span class="line">      otherInformation: <span class="string">'exception message'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>What this piece of code does is, whenever an error occurs that stack trace is send to the server using an AJAX request. This will works great for most of the scenarios but….</p>
+<p>Consider a situation where an error occurs inside a mouse move event handler. Then you will be trying to sending hundreds of requests to server in short interval. This can bring down your server if not handled properly, it’s like <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack" target="_blank" rel="external">DDOS</a>-ing your own server.</p>
+<p>Good approach will be to control the rate at which errors are send to the server for logging. This can be done using a concept called Throttling - which ensures that the target method is never called more frequently than the specified period of time.</p>
+<p>Google for JavaScript Throttling you can find lot different implementations. EmberJS also provide it’s own throttling function Ember.run.throttle</p>
+<p>Here is the example from the official <a href="http://emberjs.com/" target="_blank" rel="external">EmberJS</a> website</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' ran.'</span>); &#125;;</span><br><span class="line"><span class="keyword">var</span> myContext = &#123;name: <span class="string">'throttle'</span>&#125;;</span><br><span class="line"></span><br><span class="line">Ember.run.throttle(myContext, myFunc, <span class="number">150</span>);</span><br><span class="line"><span class="comment">// myFunc is invoked with context myContext</span></span><br></pre></td></tr></table></figure>
+<p>This <code>throttling</code> function can be used for sending errors to the server. Here is a working demo which shows the throttled error logging -<br><a href="http://cvrajeesh.github.io/emberjs/errorhandling.html" target="_blank" rel="external">http://cvrajeesh.github.io/emberjs/errorhandling.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2014/06/22/EmberJS-Error-Logging-in-Production/" data-id="ci9e0wvkf000ry4kty5hwgm53" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2014/06/22/EmberJS-Error-Logging-in-Production/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-EmberJS-How-to-Detect-User-Inactivity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/" class="article-date">
+  <time datetime="2014-06-12T07:17:49.000Z" itemprop="datePublished">2014-06-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/">EmberJS - How to Detect User Inactivity</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Scenario:</strong></p>
+<p>I am working on a web application that has a Single Page Application module which is built using <a href="http://emberjs.com/" target="_blank" rel="external">EmberJS</a> framework.</p>
+<p>This EmberJS application is a page designer where user can drag and drop items to the design surface and change properties of these items. Finally when the page is ready, he can save the changes back to server.</p>
+<p><strong>Problem:</strong></p>
+<p>Whenever a user works on the page designer for long period of time without saving the changes in between - finally when he try to save all of his changes in one shot, server side session was already timed out.</p>
+<p><strong>Solution:</strong></p>
+<p>Implemented an API on the server side which can refresh the session if this API is invoked.</p>
+<p>So on the <a href="http://emberjs.com/" target="_blank" rel="external">EmberJS</a> application side we had to calculate how long a user not active. Then we can check for this inactivity time periodically and decide whether to refresh session or not.</p>
+<p>An easy way to do it in EmberJS is by hooking to the <code>mousemove</code>, <code>keydown</code> events of the <code>ApplicationView</code>. Details can be found in the EmberJS documentation <a href="http://emberjs.com/api/classes/Ember.View.html#toc_responding-to-browser-events" target="_blank" rel="external">http://emberjs.com/api/classes/Ember.View.html#toc_responding-to-browser-events</a></p>
+<p>Here is code sample which does this</p>
+<p>First I am creating the application object with an additional property for tracking the last active time.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> App = Ember.Application.create(&#123;</span><br><span class="line">    lastActiveTime: <span class="literal">null</span>,</span><br><span class="line">    ready: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">        App.lastActiveTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>After that, hook the events in which you are interested in <code>ApplicationView</code>, which will update the last active time defined in the application object.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">App.ApplicationView = Ember.View.extend(&#123;</span><br><span class="line">    templateName: <span class="string">'application'</span>,</span><br><span class="line"></span><br><span class="line">    mouseMove: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        App.lastActiveTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    touchStart: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        App.lastActiveTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    keyDown: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        App.lastActiveTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>In our case, I am interested on <code>mouseMove</code>, <code>touchStart</code> (for touch devices) and <code>keyDown</code> events. When they are getting fired I will update the last active time with current time.</p>
+<p>Now you can use the last active time property to find out how long the user is active.</p>
+<blockquote>
+<p>Demo: <a href="http://cvrajeesh.github.io/emberjs/inactivity.html" target="_blank" rel="external">http://cvrajeesh.github.io/emberjs/inactivity.html</a></p>
+</blockquote>
+<p>This demo uses <a href="http://momentjs.com/" target="_blank" rel="external">moment.js</a> for calculating time difference as well as for formatting the time.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/" data-id="ci9e0wvkc000qy4kt93uqivbh" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/" class="article-date">
+  <time datetime="2013-08-03T07:13:01.000Z" itemprop="datePublished">2013-08-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/">Visual Studio : Debugging Silverlight Application with Chrome and Firefox</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Here is a tip if you want to debug Silverlight applications from Visual Studio 2012 if it is running in Google Chrome or Firefox</p>
+<p><strong>Google Chrome :</strong></p>
+<ol>
+<li>Run the application and select Debug –&gt; Attach to Process from the menu</li>
+<li>From the Available Processes list, look for process named “chrome.exe” with type <em>Silverlight</em></li>
+<li>Select that process and click the <em>Attach</em> button</li>
+</ol>
+<p>Here is screenshot from my machine<br><img src="http://cdn.rajeeshcv.com/images/2013/08/201308301039_chrome_silverlight_debugging.png" alt="Visual Studio attach to Silverlight in Chrome"></p>
+<p><strong>Mozilla Firefox :</strong></p>
+<p>Firefox has a slightly different approach</p>
+<ol>
+<li>Run the application and select Debug –&gt; Attach to Process from the menu</li>
+<li>From the Available Processes list, look for process named <em>plugin-container.exe</em></li>
+<li>Select that process and click the <em>Attach</em> button</li>
+</ol>
+<p>Here is the screenshot<br><img src="http://cdn.rajeeshcv.com/images/2013/08/201308301039_firefox_silverlight_debugging.png" alt="Visual Studio attach to Silverlight in Firefox"></p>
+<p>Voila!!! now you are able to get the breakpoints in Visual Studio</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/" data-id="ci9e0wvhm0006y4ktwjsefolp" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/" class="article-date">
+  <time datetime="2012-12-06T07:06:44.000Z" itemprop="datePublished">2012-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/">One of the Top E-Commerce Website in India Stores Passwords Incorrectly</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This incident made me feel very bad – couple of weeks before I ordered a product from <a href="http://www.naaptol.com/" target="_blank" rel="external">naaptol</a> a well-known E-Commerce website in India.  It was the first time I was ordering something from them. So I had to register first, after the registration was completed got a confirm email from them</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/12/20121206105945_naaptolregistration.png" alt="Registration confirmation email from naaptol"></p>
+<p>Oops!!! My password is in clear text.</p>
+<p>I thought they might be generating the email during the registration process before it is stored in their database. Without bothering much, I ordered the item. Thought about investigating about the “clear text password” little bit, but somehow forgot it.</p>
+<p>After few days when I got the product which I have ordered, it reminded me about this password incident. So in order see whether they are hashing my password or not, I used their <strong>Forgot my password</strong> option. It asked for my email address. After the submission got a message saying</p>
+<blockquote>
+<p>We’ have sent you an e-mail at the submitted ID including instructions. You’ll be back to your shopping place in no matter of time.</p>
+</blockquote>
+<p>As expected, got an email from them</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/12/20121206105945_naaptolforgotpassword.png" alt="Forgot my password email from naaptol"></p>
+<p>It reads <em>Here is your new Login and Password</em> and surprisingly password they gave is same as my old password even though in the email it is mentioned that they are sending a new password. It confirmed that they are not hashing the passwords.</p>
+<p>Will they be storing it in plain text? Who knows…</p>
+<blockquote>
+<p>Did someone tell you internet is not a good place to store your secrets?</p>
+</blockquote>
+<p>I tried to play a nice role, so sent them an email telling about about the password hashing problem. You know what happened… no reply from them till now.</p>
+<p>If you are in the naaptol technical team, convince your boss about the importance of securing the password and push that functionality in the next release.</p>
+<p>If you are a non-technical manager in naaptol, tell your developers to read this article from Jeff - <a href="http://www.codinghorror.com/blog/2007/09/youre-probably-storing-passwords-incorrectly.html" target="_blank" rel="external">You’re Probably Storing Passwords Incorrectly</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/" data-id="ci9e0wvim000cy4ktd8dtuikg" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Automating-WYSIWYG-Editors-using-Selenium-Web-Driver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/" class="article-date">
+  <time datetime="2012-12-01T06:58:23.000Z" itemprop="datePublished">2012-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/">Automating WYSIWYG Editors using Selenium Web Driver</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Automating web application using <a href="https://github.com/SeleniumHQ/selenium/wiki/Getting-Started" target="_blank" rel="external">selenium for acceptance/integration tests</a> is very easy. Recently I have faced few issues when automating a page with a JavaScript based <a href="http://en.wikipedia.org/wiki/WYSIWYG" target="_blank" rel="external">WYSIWYG</a> editors.</p>
+<p>The reason why it is hard because most of these editors create a new editable HTML document inside an iframe. There are two ways I aware that you can set text on these editors</p>
+<ol>
+<li>Executing a JavaScript code in the current page</li>
+<li>Sending keys on the editable iframe</li>
+</ol>
+<p>Here is how I automated two <a href="http://en.wikipedia.org/wiki/WYSIWYG" target="_blank" rel="external">WYSIWYG</a> editors using selenium web driver.</p>
+<h3 id="bootstrap-wysihtml5">bootstrap-wysihtml5</h3><p>Website: <a href="http://jhollingworth.github.io/bootstrap-wysihtml5/" target="_blank" rel="external">http://jhollingworth.github.io/bootstrap-wysihtml5/</a></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">SetBootstrapWysihtml5Content</span><span class="params">(IWebElement textArea, <span class="keyword">string</span> content)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">string</span> script = <span class="keyword">string</span>.Format(<span class="string">@"$('#&#123;0&#125;').data('wysihtml5').editor.setValue('&#123;1&#125;');"</span>, textArea.GetAttribute(<span class="string">"id"</span>), content);</span><br><span class="line">    ((IJavaScriptExecutor)<span class="keyword">this</span>.WebDriver).ExecuteScript(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>What this method does is, it accepts the <code>TextArea</code> web element which you are converting to an editor and the actual content to be set. Then it executes a piece of JavaScript on the current <code>WebDriver</code> context.</p>
+<p>For e.g. if you have a TextArea element with id <code>summary</code> then executing below JavaScript statement will insert a <code>h1</code> tag  with “Test” to the editor</p>
+<p><code>$(&#39;#summary&#39;).data(&#39;wysihtml5&#39;).editor.setValue(&#39;&lt;h1&gt;Test&lt;/h1&gt;&#39;);</code></p>
+<h3 id="TinyMCE">TinyMCE</h3><p>Website: <a href="http://www.tinymce.com/" target="_blank" rel="external">http://www.tinymce.com/</a></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">SetTinyMCEContent</span><span class="params">(IWebElement textArea, <span class="keyword">string</span> content)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">string</span> textAreaId = textArea.GetAttribute(<span class="string">"id"</span>);</span><br><span class="line">    <span class="keyword">string</span> frameId = <span class="keyword">string</span>.Format(<span class="string">"&#123;0&#125;_ifr"</span>, textAreaId);</span><br><span class="line">    <span class="keyword">var</span> frame = <span class="keyword">this</span>.WebDriver.FindElement(By.Id(frameId));</span><br><span class="line">    <span class="keyword">this</span>.WebDriver.SwitchTo().Frame(frame);</span><br><span class="line">    ((IJavaScriptExecutor)<span class="keyword">this</span>.WebDriver).ExecuteScript(<span class="string">"document.body.innerHTML = '"</span> + content + <span class="string">"'"</span>);</span><br><span class="line">    <span class="keyword">this</span>.WebDriver.SwitchTo().DefaultContent();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This method also accepts the <code>TextArea</code> web element which you are converting to an editor and the actual content to be set. Then it finds the corresponding <code>iframe</code> and set the <code>innerHTML</code> by executing a JavaScript statement.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/" data-id="ci9e0wvm4000wy4ktc1cdxsii" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Introducing-SourceCodeReader" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/02/Introducing-SourceCodeReader/" class="article-date">
+  <time datetime="2012-08-02T06:51:32.000Z" itemprop="datePublished">2012-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/02/Introducing-SourceCodeReader/">Introducing SourceCodeReader</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Have you ever tried to understand a project just by going through the source code?</p>
+<p>That’s how I do most of the time, till now I haven’t seen any up to date documentation which gives the clear understanding of how the code is implemented. In reality after a certain period during the development, documentation goes out of sync with the source code. So some one joins the project lately has only one way to understand the project <em>Go through the source code</em></p>
+<p>Sometimes I go through the open source projects hosted on either Github, Codeplex or Google code. All the hosting site provide you with a user interface for browsing through the source code with syntax highlighting support, which is nice. The problem I had with this is – if I see a object creation statement, method call there is no way for me to find out how it is implemented other than manually going through the files and finding it out.</p>
+<p>Most of the full blown editors provide a feature where you can navigate to the implementation directly from where it is used for e.g. Microsoft Visual Studio provides <em>Go To Definition</em> feature. I find this feature very much useful for understanding the project. Only draw back with this approach is you have to completely get the latest version of source code to your local machine.</p>
+<p><a href="http://sourcecodereader.apphb.com/" target="_blank" rel="external">SourceCodeReader</a> is trying solve this navigation problem on the web. With this application you can open a project and browse through the files with code navigation support.</p>
+<p>Source code for this project can be found at <a href="https://github.com/cvrajeesh/SourceCodeReader" target="_blank" rel="external">https://github.com/cvrajeesh/SourceCodeReader</a></p>
+<h3 id="Limitations">Limitations</h3><ol>
+<li>Now supports only Github code repository</li>
+<li>Only supports .Net C#  projects, other type of projects also works without code navigation support</li>
+</ol>
+<h3 id="How_to_use_this_application">How to use this application</h3><p>Go to <a href="http://sourcecodereader.apphb.com/" target="_blank" rel="external">SourceCodeReader</a> and enter the URL of a C# project on Github</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/08/20120802065851_image_thumb.png" alt="SourceCodeReader home page"></p>
+<p>Once you have entered a Github project link and open the project, it get the source code from the Github and present you with file browser.</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/08/20120802065857_image_thumb_2.png" alt="SourceCodeReader project directory"></p>
+<p>When you navigate to a C# file you will be able to see clickable links for identifiers which takes you the file location where that is declared.</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2012/08/20120802065903_image_thumb_1.png" alt="SourceCodeReader Go To Definition feature"></p>
+<p><strong>Sample projects :</strong></p>
+<ul>
+<li><a href="http://sourcecodereader.apphb.com/#/open/cvrajeesh/SourceCodeReader" target="_blank" rel="external">http://sourcecodereader.apphb.com/#/open/cvrajeesh/SourceCodeReader</a></li>
+<li><a href="http://sourcecodereader.apphb.com/#/open/ayende/ravendb" target="_blank" rel="external">http://sourcecodereader.apphb.com/#/open/ayende/ravendb</a></li>
+</ul>
+<p>Hope you liked this idea, please provide me with your valuable feedback.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/" data-id="ci9e0wvjj000jy4ktq2qpsvfl" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/" class="article-date">
+  <time datetime="2011-12-17T06:33:16.000Z" itemprop="datePublished">2011-12-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/">Integrating BrowserID In To Your ASP.NET MVC Application</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>BrowserID</em> is a decentralized identity system which verifies the ownership of an email address in a secure manner, without the use of any application specific authentication mechanism. Which means, you don’t need to provide an login forms in your application, instead use BrowserID feature.</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2011/12/20111217024113_BrowserID_4.png" alt="BrowserId screenshot"></p>
+<p>I am not going to explain in detail about this, but you can follow the links below to know more about it</p>
+<ul>
+<li><a href="https://browserid.org/" target="_blank" rel="external">Official website</a></li>
+<li><a href="https://github.com/mozilla/browserid/wiki/How-to-Use-BrowserID-on-Your-Site" target="_blank" rel="external">How to Use BrowserID on Your Site</a></li>
+<li><a href="http://lloyd.io/how-browserid-works/" target="_blank" rel="external">How BrowserID Works</a></li>
+</ul>
+<p>I have created demo application to show how it could be integrated into ASP.NET MVC (it could applied to ASP.NET Forms also) application.</p>
+<ul>
+<li><a href="http://nbrowserid.apphb.com/" target="_blank" rel="external">Demo app</a></li>
+<li><a href="https://github.com/cvrajeesh/NBrowserID" target="_blank" rel="external">Demo source code</a></li>
+</ul>
+<h3 id="How_the_Demo_Application_works">How the Demo Application works</h3><p>In this demo, <a href="http://nbrowserid.apphb.com/Secret" target="_blank" rel="external">Secret page</a> link can only accessed if you have logged into the application. In order to login I have provided a <em>Sign in</em> button, like most of the applications, but when you click on it. It will open a pop-up window (make sure you have disable pop-up blockers), which is a URL from <a href="https://browserid.org" target="_blank" rel="external">https://browserid.org</a> not from my application. If you don’t have a BrowserID create one, otherwise enter the Email address and Password. Then follow the steps and finally click on the <em>Sign in</em> button, which log you into the application and from there you can access the <a href="http://nbrowserid.apphb.com/Secret" target="_blank" rel="external">Secret page</a> link.</p>
+<h3 id="How_to_implement_this_in_ASP-NET_MVC">How to implement this in ASP.NET MVC</h3><p><strong>Enable BrowserID in your application : </strong></p>
+<p>Include the BrowserID javascript file <a href="https://browserid.org/include.js" target="_blank" rel="external">https://browserid.org/include.js</a> to your master page<br><code>&lt;script src=&quot;@Url.Content(&quot;https://browserid.org/include.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></p>
+<p><strong>Identify the User : </strong></p>
+<p>Instead of displaying a login form on your site which takes a username and password, it uses the BrowserID JavaScript API when the user clicks your sign-in button. For that I have added the below script to the <em>_LogOnPartial.cshtml</em> which comes with the ASP.NET MVC application you have created</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  $(<span class="string">'#login'</span>).click(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">      navigator.id.getVerifiedEmail(gotVerifiedEmail);</span><br><span class="line">  &#125;);</span><br><span class="line">.....</span><br><span class="line">.....</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Upon a successful sign-in, you’ll be called back with an assertion, a string containing a signed claim that proves the user is who they say they are. Which is passed to a method called <code>gotVerifiedEmail</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a handler that is passed an assertion after the user logs in via the</span></span><br><span class="line"><span class="comment">// browserid dialog</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gotVerifiedEmail</span><span class="params">(assertion)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// got an assertion, now send it up to the server for verification</span></span><br><span class="line">    <span class="keyword">if</span> (assertion !== <span class="literal">null</span>) &#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'POST'</span>,</span><br><span class="line">            url: <span class="string">'/Account/LogOn'</span>,</span><br><span class="line">            data: &#123; assertion: assertion &#125;,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> <span class="params">(res, status, xhr)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                    loggedIn(res.email);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            error: <span class="function"><span class="keyword">function</span> <span class="params">(res, status, xhr)</span> </span>&#123;</span><br><span class="line">                alert(<span class="string">"login failure"</span> + res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Which then sends a POST Request to the <code>LogOn</code> method on the Account controller, for verifying the assertion is correct or not. If it is a verified correctly, we will set up a forms authentication cookie so that ASP.NET feels that user has logged in to the application. Then returns the Email address back.</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[HttpPost]</span><br><span class="line"><span class="function"><span class="keyword">public</span> ActionResult <span class="title">LogOn</span><span class="params">(<span class="keyword">string</span> assertion)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> authentication = <span class="keyword">new</span> BrowserIDAuthentication();</span><br><span class="line">    <span class="keyword">var</span> verificationResult = authentication.Verify(assertion);</span><br><span class="line">    <span class="keyword">if</span> (verificationResult.IsVerified)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">string</span> email = verificationResult.Email;</span><br><span class="line">        FormsAuthentication.SetAuthCookie(email, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">return</span> Json(<span class="keyword">new</span> &#123; email &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Json(<span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In order to do the verification, we post the assertion to the URL provided by the Identity Authority itself (<a href="https://browserid.org/verify" target="_blank" rel="external">https://browserid.org/verify</a> in this case), which will give a valid response if it is valid. The Verify method looks like this</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> VerificationResult <span class="title">Verify</span><span class="params">(<span class="keyword">string</span> assertion)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    JObject verificationResult = <span class="keyword">this</span>.GetVerificationResult(assertion);</span><br><span class="line">    <span class="keyword">string</span> email = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">bool</span> verified = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (verificationResult != <span class="keyword">null</span> &amp;&amp; verificationResult[<span class="string">"status"</span>].ToString() == <span class="string">"okay"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        email = verificationResult[<span class="string">"email"</span>].ToString();</span><br><span class="line">        verified = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> VerificationResult &#123;Email = email, IsVerified = verified &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> Gets the verification result from Identity Authority.</span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;param name="assertion"&gt;</span>The assertion.<span class="xmlDocTag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;returns&gt;</span><span class="xmlDocTag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> JObject <span class="title">GetVerificationResult</span><span class="params">(<span class="keyword">string</span> assertion)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">// Build he request</span></span><br><span class="line">    <span class="keyword">var</span> req = (HttpWebRequest)WebRequest.Create(IdentityAuthorityVerificationUrl);</span><br><span class="line">    req.Method = <span class="string">"POST"</span>;</span><br><span class="line">    req.ContentType = <span class="string">"application/x-www-form-urlencoded"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (HttpContext.Current == <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullReferenceException(<span class="string">"HttContext is null. Please make sure that, your application is running in a web scenario"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Build the data for posting</span></span><br><span class="line">    <span class="keyword">var</span> payload = <span class="keyword">string</span>.Format(<span class="string">"assertion=&#123;0&#125;&amp;audience=&#123;1&#125;"</span>, assertion, HttpContext.Current.Request.Headers[<span class="string">"Host"</span>]);</span><br><span class="line">    <span class="keyword">byte</span>[] payloadInBytes = Encoding.UTF8.GetBytes(payload);</span><br><span class="line">    req.ContentLength = payloadInBytes.Length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> dataStream = req.GetRequestStream();</span><br><span class="line">    dataStream.Write(payloadInBytes, <span class="number">0</span>, payloadInBytes.Length);</span><br><span class="line">    dataStream.Close();</span><br><span class="line"></span><br><span class="line">    JObject result = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> res = req.GetResponse();</span><br><span class="line">    dataStream = res.GetResponseStream();</span><br><span class="line">    <span class="keyword">if</span> (dataStream != <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> responseData = <span class="keyword">new</span> StreamReader(dataStream).ReadToEnd();</span><br><span class="line">        res.Close();</span><br><span class="line">        dataStream.Close();</span><br><span class="line">        result = JObject.Parse(responseData);</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        res.Close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Hope this will help you to setup an authentication system to your application very easily and in a more secure way.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/" data-id="ci9e0wvjp000ky4ktgndbter7" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/" class="article-date">
+  <time datetime="2011-11-30T06:25:45.000Z" itemprop="datePublished">2011-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/">Attach to Any ASP.NET Web Server from Visual Studio in One Click</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This is an update to my previous blog post <a href="/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/" title="Attach to Visual Studio Development Server with One Click">Attach to Visual Studio Development Server with One Click</a>.</p>
+<p>The Visual Studio Macro from previous article doesn’t support IISExpress or IIS; it only supported the Visual Studio Development Server, more over it doesn’t detect latest Development Web Server <em>WebDev.WebServer40.exe</em>.</p>
+<p>Now I have updated the Macro so that it will automatically detect the Web Server setting from the project properties and attach it accordingly.</p>
+<p>Below is the code for the new Macro, I think it is self-explanatory</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Public</span> <span class="keyword">Sub</span> AttachToWebServer()</span><br><span class="line">    <span class="keyword">Dim</span> attached <span class="keyword">As</span> <span class="built_in">Boolean</span> = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">Dim</span> project <span class="keyword">As</span> EnvDTE.Project = GetStartupProject()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> (project <span class="keyword">Is</span> <span class="literal">Nothing</span>) <span class="keyword">Then</span></span><br><span class="line">        MsgBox(<span class="string">"Couldn't find a web project that can be attached"</span>)</span><br><span class="line">        <span class="keyword">Return</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    attached = AttachToProcess(project)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> (<span class="keyword">Not</span> attached) <span class="keyword">Then</span></span><br><span class="line">        MsgBox(<span class="string">"Couldn't attach to the process"</span>)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Function</span> GetStartupProject() <span class="keyword">As</span> EnvDTE.Project</span><br><span class="line">    <span class="keyword">Dim</span> startUpProject <span class="keyword">As</span> <span class="built_in">String</span> = DTE.Solution.Properties.Item(<span class="string">"StartupProject"</span>).Value</span><br><span class="line"></span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> currentProject <span class="keyword">As</span> EnvDTE.Project <span class="keyword">In</span> DTE.Solution.Projects</span><br><span class="line">        <span class="keyword">If</span> currentProject.Name = startUpProject <span class="keyword">Then</span></span><br><span class="line">            <span class="keyword">Return</span> currentProject</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Return</span> <span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Function</span> AttachToProcess(<span class="keyword">ByVal</span> project <span class="keyword">As</span> EnvDTE.Project) <span class="keyword">As</span> <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">Dim</span> serverProcessNamePattern <span class="keyword">As</span> <span class="built_in">String</span></span><br><span class="line">    <span class="comment">' Using either IIS express or IIS</span></span><br><span class="line">    <span class="keyword">If</span> project.Properties.Item(<span class="string">"WebApplication.UseIIS"</span>).Value = <span class="string">"True"</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="comment">' Using IIS Express</span></span><br><span class="line">        <span class="keyword">If</span> project.Properties.Item(<span class="string">"WebApplication.DevelopmentServerCommandLine"</span>).Value.ToString().Length &gt; <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">            serverProcessNamePattern = <span class="string">".*iisexpress.exe"</span></span><br><span class="line">        <span class="keyword">Else</span> <span class="comment">' Real IIS</span></span><br><span class="line">            serverProcessNamePattern = <span class="string">".*w3wp.exe"</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Else</span> <span class="comment">' Assume development web server</span></span><br><span class="line">        serverProcessNamePattern = <span class="string">".*WebDev.WebServer\d+.EXE"</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Return</span> AttachToWebServer(serverProcessNamePattern)</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Function</span> AttachToWebServer(<span class="keyword">ByVal</span> serverProcessNamePattern <span class="keyword">As</span> <span class="built_in">String</span>) <span class="keyword">As</span> <span class="built_in">Boolean</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Dim</span> attached <span class="keyword">As</span> <span class="built_in">Boolean</span> = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> process <span class="keyword">In</span> DTE.Debugger.LocalProcesses</span><br><span class="line">        <span class="keyword">If</span> (Regex.IsMatch(process.Name, serverProcessNamePattern)) <span class="keyword">Then</span></span><br><span class="line">            process.Attach()</span><br><span class="line">            attached = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">For</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Return</span> attached</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br></pre></td></tr></table></figure>
+<p>Read my previous article <a href="/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/" title="Attach to Visual Studio Development Server with One Click">Attach to Visual Studio Development Server with One Click</a> to understand how we can add this Macro as command to the Visual Studio toolbar.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/" data-id="ci9e0wvme000yy4ktx7ssd80w" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Attach-to-Visual-Studio-Development-Server-with-One-Click" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/" class="article-date">
+  <time datetime="2011-11-26T06:14:24.000Z" itemprop="datePublished">2011-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/">Attach to Visual Studio Development Server with One Click</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In my day to day work, during the development I had to attach an ASP.NET application to the development server (Cassini) several times in order to debug and fix a problem.</p>
+<p>This task is little bit time consuming because this is how we normally do it</p>
+<ol>
+<li>Click on the “Attach to Process” menu under the Debug menu</li>
+<li>Select the correct process from the list of available processes</li>
+<li>Either double click on the select process or click the “Attach” button</li>
+</ol>
+<p>You can reduce these into two steps, if you assign a short cut key to the <em>Attach to Process</em> command.</p>
+<p>What I found is, most of the time is lost for finding and selecting the correct process from the available list of processes in the <em>Attach to Process</em> dialog.</p>
+<p>So in order to be more productive, I have created a macro which will automatically attach to the Visual Studio Development Server automatically, saves your time from scroll through the big list of processes.</p>
+<p>Below is the code for this macro</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Public</span> <span class="keyword">Sub</span> AttachToDevelopmentServer()</span><br><span class="line">    <span class="keyword">Dim</span> attached <span class="keyword">As</span> <span class="built_in">Boolean</span> = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">Dim</span> process <span class="keyword">As</span> EnvDTE.Process</span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> process <span class="keyword">In</span> DTE.Debugger.LocalProcesses</span><br><span class="line">        <span class="keyword">If</span> (process.Name.EndsWith(<span class="string">"WebDev.WebServer20.EXE"</span>)) <span class="keyword">Then</span></span><br><span class="line">            process.Attach()</span><br><span class="line">            attached = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">For</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> (<span class="keyword">Not</span> attached) <span class="keyword">Then</span></span><br><span class="line">        MsgBox(<span class="string">"Couldn't attach to the process"</span>)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>If you don’t know to how to create a macro, these are the steps for doing it</p>
+<ol>
+<li>In Visual Studio Go To the Tools menu</li>
+<li>Then select the Macros and then Macros IDE (Short cut is Alt+F11). This will open up a new IDE similar to Visual Studio.</li>
+<li>In the project explorer under <em>My Macros</em> you will see <em>My Module</em> or you can create a new module by right clicking on the project, then Add -&gt; Add Module. In my case I created a new module and called it as <em>Extensions</em></li>
+<li>Copy and paste above subroutine to that module.</li>
+</ol>
+<p>Now we have to execute the newly created macros on clicking on a toolbar button. For that, follow these steps</p>
+<ol>
+<li>In Visual Studio, go to the Tool menu, under that select the Customize menu. This will open up the Customize dialog</li>
+<li>Select the Commands tab</li>
+<li>Select the Toolbar checkbox and then select the Toolbar on which you want this button to appear from dropdown list. I chose the <em>Standard Toolbar</em></li>
+<li>Now click on the “Add Command” button. Then select the Macros from the categories in the <em>Add Command</em> dialog.</li>
+<li>Now you will see the list of available macros on the list box on. From that list select your Macro <em>AttachToDevelopmentServer</em> and click OK</li>
+<li>If you want, you can customize the text which appears on the command button, by clicking on the <em>Modify Selection</em><br>Here it is how it looked in my machine</li>
+</ol>
+<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111126012529_AddCommand_thumb.png" alt="Adding Command to the Visual Studio Toolbar"></p>
+<p>That’s it, now you will be able to new button appeared in the standard toolbar. If you click on that, it will automatically attach your web project to the running application in the development server.</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111126012540_AttachToProcess_thumb.png" alt="Visual Studio Toolbar after Customization"></p>
+<p><strong>Note:</strong> There are couples of problems here</p>
+<ol>
+<li>This doesn’t work if you have set the IIS Express/IIS itself as the server for running the application.( <em>Update:</em> A new macro to support this feature is exlplained here <a href="/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/" title="Attach to Any ASP.NET Web Server from Visual Studio in One Click">Attach to Any ASP.NET Web Server from Visual Studio in One Click</a> )</li>
+<li>If you have multiple web applications in your project, it will attach to the first development server. So I suggest you to read my previous post about <a href="/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/" title="disabling multiple Visual Studio development webservers">disabling multiple Visual Studio development webservers</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/" data-id="ci9e0wvmb000xy4kt7yuxlnt9" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Multiple-Visual-Studio-Development-Servers-while-Debugging" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/" class="article-date">
+  <time datetime="2011-11-24T10:03:44.000Z" itemprop="datePublished">2011-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/">Multiple Visual Studio Development Servers while Debugging</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>You might have noticed that when you start debugging an ASP.NET web application, it start more than one visual studio development servers and in the system tray you see something like this</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111124063108_Mutiple_development_server_2.png" alt="Multiple Development Servers"></p>
+<p>This happens when your solution contains more than one web application, setting one as the StartUp project is not going to help..</p>
+<p>The reason for this is - by default any web application is set to start when we trigger the debugging process in visual studio. We need to disable that auto start feature so that only one visual studio development server is getting started when we are debugging.</p>
+<p>These are the steps for disabling it</p>
+<ol>
+<li>Select the web project which you don’t want to start</li>
+<li>Go to the properties window (Shortcut – press F4)</li>
+<li>Set “Always Start When Debugging” to False</li>
+</ol>
+<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111124063119_Disable_Start_When_Debuggin_thumb.png" alt="Disable always start"></p>
+<p>This is how you could do it in Visual studio 2010, I hope the same applies to Visual studio 2008 too. Now if you start debugging, you will see only one development webserver.</p>
+<p>Hope this helps</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/" data-id="ci9e0wviu000ey4kt9gt6d6bu" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/">EmberJS - How to Detect User Inactivity</a>
+          </li>
+        
+          <li>
+            <a href="/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/">Visual Studio : Debugging Silverlight Application with Chrome and Firefox</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/">One of the Top E-Commerce Website in India Stores Passwords Incorrectly</a>
+          </li>
+        
+          <li>
+            <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/">Automating WYSIWYG Editors using Selenium Web Driver</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Rajeesh C V<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'rajeeshcv';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
