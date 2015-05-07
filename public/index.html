@@ -84,6 +84,56 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-Run-Gulp-Tasks-in-a-Predefined-Order" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/" class="article-date">
+  <time datetime="2015-05-07T12:56:28.000Z" itemprop="datePublished">2015-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/">Run Gulp Tasks in a Predefined Order</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a> is build automation tool which runs on top of Node. In my current project I had to execute set of tasks in a predefined order, in which some of the tasks can be run in parallel to improve the efficiency.</p>
+<p>By default <a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a> runs all the tasks at the same time, so after googling I saw this official <a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/running-tasks-in-series.md" target="_blank" rel="external">article</a>. In this approach every task will takes a callback function so that Gulp knows when that task is completed. Then other task add this as a dependency</p>
+<p>E.g. from the official article</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// takes in a callback so the engine knows when it'll be done</span></span><br><span class="line">gulp.task(<span class="string">'one'</span>, <span class="function"><span class="keyword">function</span><span class="params">(cb)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do stuff -- async or otherwise</span></span><br><span class="line">    <span class="comment">// if err is not null and not undefined, the orchestration will stop, and 'two' will not run</span></span><br><span class="line">    cb(err);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// identifies a dependent task must be complete before this one begins</span></span><br><span class="line">gulp.task(<span class="string">'two'</span>, [<span class="string">'one'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// task 'one' is done now</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'one'</span>, <span class="string">'two'</span>]);</span><br><span class="line"><span class="comment">// alternatively: gulp.task('default', ['two']);</span></span><br></pre></td></tr></table></figure>
+<p>Here task <code>two</code> is depends on task <code>one</code>, so Gulp ensures that task <code>one</code> is completed before running task <code>two</code>.One drawback with this approach is tasks are tightly coupled to each other which reduces the flexibility if you want to change the order.</p>
+<p>So I came across a plugin called <a href="https://www.npmjs.com/package/run-sequence" target="_blank" rel="external">run-sequence</a>, this plugin allows you to order the tasks much easy. We can re-write the first example like this</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</span><br><span class="line">    runSequence = <span class="built_in">require</span>(<span class="string">'run-sequence'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'one'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Returning the stream is improtant</span></span><br><span class="line">  <span class="keyword">return</span> gulp.src(....)</span><br><span class="line">        .pipe(gulp.dest(....);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'two'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Returning the stream is improtant</span></span><br><span class="line">  <span class="keyword">return</span> gulp.src(....)</span><br><span class="line">        .pipe(gulp.dest(....);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    runsSequence(<span class="string">'one'</span>, <span class="string">'two'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>Caution</strong><br>Make sure each of the tasks returns a <code>stream</code></p>
+<h3 id="Running_tasks_in_parallel">Running tasks in parallel</h3><p><a href="https://www.npmjs.com/package/run-sequence" target="_blank" rel="external">run-sequence</a> can do much more, like running in parallel</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    runsSequence(</span><br><span class="line">        <span class="string">'task-1'</span>,</span><br><span class="line">        <span class="string">'task-2'</span>,</span><br><span class="line">        [<span class="string">'task-3'</span>, <span class="string">'task-4'</span>, <span class="string">'task-5'</span>],</span><br><span class="line">        [<span class="string">'task-7'</span>, <span class="string">'task-8'</span>]</span><br><span class="line">      );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>The above one ensures that <code>task-1</code> and <code>task-2</code> will be running in series, after that <code>task-3</code>, <code>task-4</code>, <code>task-5</code> will run in parallel, then <code>task-7</code> and <code>task-8</code> are run in parallel as well.</p>
+<p>Main advantage I see when compared to official documentation is - tasks are independent and orchestration is done by someone else.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/" data-id="ci9e7dsw7000cukktbfr6mocl" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-EmberJS-Error-Logging-in-Production" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/" class="article-date">
@@ -121,7 +171,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2014/06/22/EmberJS-Error-Logging-in-Production/" data-id="ci9e0wvkf000ry4kty5hwgm53" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2014/06/22/EmberJS-Error-Logging-in-Production/" data-id="ci9e7dsyt000sukkt2poi9kxt" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2014/06/22/EmberJS-Error-Logging-in-Production/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -179,7 +229,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/" data-id="ci9e0wvkc000qy4kt93uqivbh" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/" data-id="ci9e7dsyn000rukkt5h4dk13h" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -234,7 +284,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/" data-id="ci9e0wvhm0006y4ktwjsefolp" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/" data-id="ci9e7dsv50006ukkt8q91wabd" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2013/08/03/Visual-Studio-Debugging-Silverlight-Application-with-Chrome-and-Firefox/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -290,7 +340,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/" data-id="ci9e0wvim000cy4ktd8dtuikg" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/" data-id="ci9e7dswc000dukkt7rzbrht4" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -343,7 +393,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/" data-id="ci9e0wvm4000wy4ktc1cdxsii" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/" data-id="ci9e7dt59000xukkt3rr324y8" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -403,7 +453,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/" data-id="ci9e0wvjj000jy4ktq2qpsvfl" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/" data-id="ci9e7dsxn000kukktphxaasyi" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2012/08/02/Introducing-SourceCodeReader/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -467,7 +517,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/" data-id="ci9e0wvjp000ky4ktgndbter7" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/" data-id="ci9e7dsxt000lukkt3s3ty6gy" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -511,7 +561,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/" data-id="ci9e0wvme000yy4ktx7ssd80w" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/" data-id="ci9e7dt60000zukktbsl9g3hc" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/11/30/Attach-to-Any-ASP-NET-Web-Server-from-Visual-Studio-in-One-Click/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -585,60 +635,9 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/" data-id="ci9e0wvmb000xy4kt7yuxlnt9" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/" data-id="ci9e7dt5d000yukktxkxkcs8h" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/11/26/Attach-to-Visual-Studio-Development-Server-with-One-Click/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Multiple-Visual-Studio-Development-Servers-while-Debugging" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/" class="article-date">
-  <time datetime="2011-11-24T10:03:44.000Z" itemprop="datePublished">2011-11-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/">Multiple Visual Studio Development Servers while Debugging</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>You might have noticed that when you start debugging an ASP.NET web application, it start more than one visual studio development servers and in the system tray you see something like this</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111124063108_Mutiple_development_server_2.png" alt="Multiple Development Servers"></p>
-<p>This happens when your solution contains more than one web application, setting one as the StartUp project is not going to help..</p>
-<p>The reason for this is - by default any web application is set to start when we trigger the debugging process in visual studio. We need to disable that auto start feature so that only one visual studio development server is getting started when we are debugging.</p>
-<p>These are the steps for disabling it</p>
-<ol>
-<li>Select the web project which you don’t want to start</li>
-<li>Go to the properties window (Shortcut – press F4)</li>
-<li>Set “Always Start When Debugging” to False</li>
-</ol>
-<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111124063119_Disable_Start_When_Debuggin_thumb.png" alt="Disable always start"></p>
-<p>This is how you could do it in Visual studio 2010, I hope the same applies to Visual studio 2008 too. Now if you start debugging, you will see only one development webserver.</p>
-<p>Hope this helps</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/" data-id="ci9e0wviu000ey4kt9gt6d6bu" class="article-share-link">Share</a>
-      
-        <a href="http://rajeeshcv.com/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/#disqus_thread" class="article-comment-link">Comments</a>
       
       
     </footer>
@@ -667,7 +666,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -677,6 +676,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/">Run Gulp Tasks in a Predefined Order</a>
+          </li>
         
           <li>
             <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
@@ -692,10 +695,6 @@ ga('send', 'pageview');
         
           <li>
             <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/">One of the Top E-Commerce Website in India Stores Passwords Incorrectly</a>
-          </li>
-        
-          <li>
-            <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/">Automating WYSIWYG Editors using Selenium Web Driver</a>
           </li>
         
       </ul>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Sharing My Thoughts]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://rajeeshcv.com/"/>
-  <updated>2015-04-22T20:33:35.760Z</updated>
+  <updated>2015-05-07T13:33:42.819Z</updated>
   <id>http://rajeeshcv.com/</id>
   
   <author>
@@ -13,6 +13,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Run Gulp Tasks in a Predefined Order]]></title>
+    <link href="http://rajeeshcv.com/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/"/>
+    <id>http://rajeeshcv.com/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/</id>
+    <published>2015-05-07T12:56:28.000Z</published>
+    <updated>2015-05-07T13:33:42.819Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a> is build automation tool which runs on top of Node. In my current project I had to execute set of tasks in a predefined order, in which some of the tasks can be run in parallel to improve the efficiency.</p>
+<p>By default <a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a> runs all the tasks at the same time, so after googling I saw this official <a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/running-tasks-in-series.md" target="_blank" rel="external">article</a>. In this approach every task will takes a callback function so that Gulp knows when that task is completed. Then other task add this as a dependency</p>
+<p>E.g. from the official article</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// takes in a callback so the engine knows when it'll be done</span></span><br><span class="line">gulp.task(<span class="string">'one'</span>, <span class="function"><span class="keyword">function</span><span class="params">(cb)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do stuff -- async or otherwise</span></span><br><span class="line">    <span class="comment">// if err is not null and not undefined, the orchestration will stop, and 'two' will not run</span></span><br><span class="line">    cb(err);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// identifies a dependent task must be complete before this one begins</span></span><br><span class="line">gulp.task(<span class="string">'two'</span>, [<span class="string">'one'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// task 'one' is done now</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'one'</span>, <span class="string">'two'</span>]);</span><br><span class="line"><span class="comment">// alternatively: gulp.task('default', ['two']);</span></span><br></pre></td></tr></table></figure>
+<p>Here task <code>two</code> is depends on task <code>one</code>, so Gulp ensures that task <code>one</code> is completed before running task <code>two</code>.One drawback with this approach is tasks are tightly coupled to each other which reduces the flexibility if you want to change the order.</p>
+<p>So I came across a plugin called <a href="https://www.npmjs.com/package/run-sequence" target="_blank" rel="external">run-sequence</a>, this plugin allows you to order the tasks much easy. We can re-write the first example like this</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</span><br><span class="line">    runSequence = <span class="built_in">require</span>(<span class="string">'run-sequence'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'one'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Returning the stream is improtant</span></span><br><span class="line">  <span class="keyword">return</span> gulp.src(....)</span><br><span class="line">        .pipe(gulp.dest(....);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'two'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Returning the stream is improtant</span></span><br><span class="line">  <span class="keyword">return</span> gulp.src(....)</span><br><span class="line">        .pipe(gulp.dest(....);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    runsSequence(<span class="string">'one'</span>, <span class="string">'two'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>Caution</strong><br>Make sure each of the tasks returns a <code>stream</code></p>
+<h3 id="Running_tasks_in_parallel">Running tasks in parallel</h3><p><a href="https://www.npmjs.com/package/run-sequence" target="_blank" rel="external">run-sequence</a> can do much more, like running in parallel</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    runsSequence(</span><br><span class="line">        <span class="string">'task-1'</span>,</span><br><span class="line">        <span class="string">'task-2'</span>,</span><br><span class="line">        [<span class="string">'task-3'</span>, <span class="string">'task-4'</span>, <span class="string">'task-5'</span>],</span><br><span class="line">        [<span class="string">'task-7'</span>, <span class="string">'task-8'</span>]</span><br><span class="line">      );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>The above one ensures that <code>task-1</code> and <code>task-2</code> will be running in series, after that <code>task-3</code>, <code>task-4</code>, <code>task-5</code> will run in parallel, then <code>task-7</code> and <code>task-8</code> are run in parallel as well.</p>
+<p>Main advantage I see when compared to official documentation is - tasks are independent and orchestration is done by someone else.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a> is build automation tool which runs on top of Node. In my current pr]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[EmberJS Error Logging in Production]]></title>
@@ -591,24 +616,6 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p>What makes your application different from others? I strongly feel the user experience that you provides plays an important role to be su]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Asp.Net MVC - Fluent Html Helper for FlexiGrid]]></title>
-    <link href="http://rajeeshcv.com/2010/04/18/Asp-Net-MVC-Fluent-Html-Helper-for-FlexiGrid/"/>
-    <id>http://rajeeshcv.com/2010/04/18/Asp-Net-MVC-Fluent-Html-Helper-for-FlexiGrid/</id>
-    <published>2010-04-18T07:05:04.000Z</published>
-    <updated>2015-04-22T20:33:35.598Z</updated>
-    <content type="html"><![CDATA[<p>There are so many free JQuery Grid plugins out there, in that I liked <a href="https://github.com/paulopmx/Flexigrid" target="_blank" rel="external">FlexiGrid</a> just because of it’s look and style. In order to use it in your MVC application you may have to put the Javascript code into your view, which requires the property names of your model in order to generates the Grid columns as well the search options etc… as everybody knows when you deal with hard coded string as the property names in any code, it is error prone.</p>
-<p>In order to avoid this problem I thought of creating a html extension which is tightly coupled with your data that is going to bound to the Grid. Which helps the developer from writing any javascript codes.</p>
-<blockquote>
-<p>Full source code can found in this Git repo  <a href="https://github.com/cvrajeesh/mvc-fluent-jquery-plugin-controls" target="_blank" rel="external">mvc-fluent-jquery-plugin-controls</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>There are so many free JQuery Grid plugins out there, in that I liked <a href="https://github.com/paulopmx/Flexigrid" target="_blank" rel]]>
     </summary>
     
   </entry>

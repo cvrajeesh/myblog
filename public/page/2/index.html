@@ -84,6 +84,57 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-Multiple-Visual-Studio-Development-Servers-while-Debugging" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/" class="article-date">
+  <time datetime="2011-11-24T10:03:44.000Z" itemprop="datePublished">2011-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/">Multiple Visual Studio Development Servers while Debugging</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>You might have noticed that when you start debugging an ASP.NET web application, it start more than one visual studio development servers and in the system tray you see something like this</p>
+<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111124063108_Mutiple_development_server_2.png" alt="Multiple Development Servers"></p>
+<p>This happens when your solution contains more than one web application, setting one as the StartUp project is not going to help..</p>
+<p>The reason for this is - by default any web application is set to start when we trigger the debugging process in visual studio. We need to disable that auto start feature so that only one visual studio development server is getting started when we are debugging.</p>
+<p>These are the steps for disabling it</p>
+<ol>
+<li>Select the web project which you don’t want to start</li>
+<li>Go to the properties window (Shortcut – press F4)</li>
+<li>Set “Always Start When Debugging” to False</li>
+</ol>
+<p><img src="http://cdn.rajeeshcv.com/images/2011/11/20111124063119_Disable_Start_When_Debuggin_thumb.png" alt="Disable always start"></p>
+<p>This is how you could do it in Visual studio 2010, I hope the same applies to Visual studio 2008 too. Now if you start debugging, you will see only one development webserver.</p>
+<p>Hope this helps</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/" data-id="ci9e7dsws000fukkt7b4e07gs" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2011/11/24/Multiple-Visual-Studio-Development-Servers-while-Debugging/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Abstractions-can-also-put-you-in-Trouble" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2011/11/19/Abstractions-can-also-put-you-in-Trouble/" class="article-date">
@@ -128,7 +179,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/11/19/Abstractions-can-also-put-you-in-Trouble/" data-id="ci9e0wvn10010y4ktpoal3xcs" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/11/19/Abstractions-can-also-put-you-in-Trouble/" data-id="ci9e7dt6a0011ukktkp6wwm1m" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/11/19/Abstractions-can-also-put-you-in-Trouble/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -189,7 +240,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/11/15/How-to-Move-Directories-Across-SVN-Repositories/" data-id="ci9e0wvjz000my4ktt8xepjqu" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/11/15/How-to-Move-Directories-Across-SVN-Repositories/" data-id="ci9e7dsy6000nukktijygz95v" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/11/15/How-to-Move-Directories-Across-SVN-Repositories/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -244,7 +295,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/10/30/Stay-Away-from-Request-Url/" data-id="ci9e0wvi30009y4ktbhev1b00" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/10/30/Stay-Away-from-Request-Url/" data-id="ci9e7dsvj0009ukktukoj7om9" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/10/30/Stay-Away-from-Request-Url/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -295,7 +346,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/10/27/New-Outlook–Rolling-out-My-Own-Blog-Engine/" data-id="ci9e0wviq000dy4ktbpdhexu8" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/10/27/New-Outlook–Rolling-out-My-Own-Blog-Engine/" data-id="ci9e7dswj000eukktr27hwugq" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/10/27/New-Outlook–Rolling-out-My-Own-Blog-Engine/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -348,7 +399,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/04/05/Web-Usability–Avoid-an-Extra-Page-Load-with-OpenSearch/" data-id="ci9e0wvhe0005y4ktdj1f0wyu" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/04/05/Web-Usability–Avoid-an-Extra-Page-Load-with-OpenSearch/" data-id="ci9e7dsv10005ukktd3eidtcg" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/04/05/Web-Usability–Avoid-an-Extra-Page-Load-with-OpenSearch/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -397,7 +448,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/02/27/MVC-Rendering-View-Elements-in-a-Specified-Order/" data-id="ci9e0wvj0000fy4ktnvsoszxa" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2011/02/27/MVC-Rendering-View-Elements-in-a-Specified-Order/" data-id="ci9e7dswy000gukkt68hcxis1" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2011/02/27/MVC-Rendering-View-Elements-in-a-Specified-Order/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -458,7 +509,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2010/12/27/Create-a-Live-Aquarium-Wallpaper-in-Android/" data-id="ci9e0wvkq000ty4kt1tek7wmq" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2010/12/27/Create-a-Live-Aquarium-Wallpaper-in-Android/" data-id="ci9e7dt4r000uukktskjbruwi" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2010/12/27/Create-a-Live-Aquarium-Wallpaper-in-Android/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -514,7 +565,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/" data-id="ci9e0wvje000iy4ktc2ry4cvb" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/" data-id="ci9e7dsxj000jukktwq0eh7ua" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2010/09/20/It’s-Better-to-Automate-Instead-of-Checklists/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -558,52 +609,9 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2010/06/01/User-Experience-Makes-Applications-Stand-out/" data-id="ci9e0wvhs0007y4kto8blbj9z" class="article-share-link">Share</a>
+      <a data-url="http://rajeeshcv.com/2010/06/01/User-Experience-Makes-Applications-Stand-out/" data-id="ci9e7dsv90007ukktxtn59rdr" class="article-share-link">Share</a>
       
         <a href="http://rajeeshcv.com/2010/06/01/User-Experience-Makes-Applications-Stand-out/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Asp-Net-MVC-Fluent-Html-Helper-for-FlexiGrid" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/04/18/Asp-Net-MVC-Fluent-Html-Helper-for-FlexiGrid/" class="article-date">
-  <time datetime="2010-04-18T07:05:04.000Z" itemprop="datePublished">2010-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/04/18/Asp-Net-MVC-Fluent-Html-Helper-for-FlexiGrid/">Asp.Net MVC - Fluent Html Helper for FlexiGrid</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>There are so many free JQuery Grid plugins out there, in that I liked <a href="https://github.com/paulopmx/Flexigrid" target="_blank" rel="external">FlexiGrid</a> just because of it’s look and style. In order to use it in your MVC application you may have to put the Javascript code into your view, which requires the property names of your model in order to generates the Grid columns as well the search options etc… as everybody knows when you deal with hard coded string as the property names in any code, it is error prone.</p>
-<p>In order to avoid this problem I thought of creating a html extension which is tightly coupled with your data that is going to bound to the Grid. Which helps the developer from writing any javascript codes.</p>
-<blockquote>
-<p>Full source code can found in this Git repo  <a href="https://github.com/cvrajeesh/mvc-fluent-jquery-plugin-controls" target="_blank" rel="external">mvc-fluent-jquery-plugin-controls</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2010/04/18/Asp-Net-MVC-Fluent-Html-Helper-for-FlexiGrid/" data-id="ci9e0wvmk000zy4kttqs3ksig" class="article-share-link">Share</a>
-      
-        <a href="http://rajeeshcv.com/2010/04/18/Asp-Net-MVC-Fluent-Html-Helper-for-FlexiGrid/#disqus_thread" class="article-comment-link">Comments</a>
       
       
     </footer>
@@ -632,7 +640,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -642,6 +650,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/07/Run-Gulp-Tasks-in-a-Predefined-Order/">Run Gulp Tasks in a Predefined Order</a>
+          </li>
         
           <li>
             <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
@@ -657,10 +669,6 @@ ga('send', 'pageview');
         
           <li>
             <a href="/2012/12/06/One-of-the-Top-E-Commerce-Website-in-India-Stores-Passwords-Incorrectly/">One of the Top E-Commerce Website in India Stores Passwords Incorrectly</a>
-          </li>
-        
-          <li>
-            <a href="/2012/12/01/Automating-WYSIWYG-Editors-using-Selenium-Web-Driver/">Automating WYSIWYG Editors using Selenium Web Driver</a>
           </li>
         
       </ul>
