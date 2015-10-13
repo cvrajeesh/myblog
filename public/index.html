@@ -84,6 +84,76 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-Build-Parsers-using-PEG-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/13/Build-Parsers-using-PEG-js/" class="article-date">
+  <time datetime="2015-10-13T09:11:03.000Z" itemprop="datePublished">2015-10-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/13/Build-Parsers-using-PEG-js/">Build Parsers using PEG.js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Writing parser from scratch is a tedious task. Recently I came across a simple parser generator for JavaScript called <a href="http://pegjs.org/" target="_blank" rel="external">PEG.js</a></p>
+<blockquote><p>PEG.js is a simple parser generator for JavaScript that produces fast parsers with excellent error reporting. You can use it to process complex data or computer languages and build transformers, interpreters, compilers and other tools easily.</p>
+<footer><strong>from official website</strong><cite><a href="http://pegjs.org/" target="_blank" rel="external">pegjs.org</a></cite></footer></blockquote>
+<p>In order to create a parser, provide a grammar as the input and <a href="http://pegjs.org/" target="_blank" rel="external">PEG.js</a> will build a parser for that grammar. Then that generated parser can be used to parse the content.</p>
+<p><a href="http://pegjs.org/" target="_blank" rel="external">PEG.js</a> grammar has a particular syntax, you can learn more about it from <a href="http://pegjs.org/documentation#grammar-syntax-and-semantics" target="_blank" rel="external">http://pegjs.org/documentation#grammar-syntax-and-semantics</a>. If you are familiar with regular expression it will easy understand.</p>
+<p>Take a simple example for writing grammar which will parse texts like “$100”, “$150” etc… </p>
+<p>Example text follow a pattern where currency symbol i.e. “$” is followed by a number. Translating this into <a href="http://pegjs.org/" target="_blank" rel="external">pEG.js</a> grammar looks like this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Text&#10; = &#34;$&#34; Number&#10;&#10;Number&#10; = Digit+&#10;&#10;Digit&#10; = [0-9]</span><br></pre></td></tr></table></figure>
+<p>Every grammar has set of <em>rules</em>, in this case we have three rules. Every rule has a <em>name</em> that identify the rule and a parsing expression. Rule name is followed by “=” then parsing expression.</p>
+<ol>
+<li>Rule <strong>Text</strong><br>  Parsing expression for this rule is <em>“$” Number</em>. This parsing expression says “Match text that has literal “$” followed by a <em>Number</em>“. Note <em>Number</em> is name of a rule.</li>
+<li>Rule <strong>Number</strong><br> Parsing expression “Digit+” means - match text that has one or more <em>Digit</em>.</li>
+<li>Rule <strong>Digit</strong><br> Last rule says match any character that is between 0 to 9</li>
+</ol>
+<p>Hope you got basic idea how a grammar is created. <a href="http://pegjs.org/" target="_blank" rel="external">PEG.js</a> provides playground where you can try your grammar and see how it is working. To try this go to <a href="http://pegjs.org/online" target="_blank" rel="external">http://pegjs.org/online</a> and copy paste the grammar we have created on text box 1 and enter “$100” on text box 2. Parsed result will be shown on the <em>output</em> section and it looks like this</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   <span class="string">"$"</span>,</span><br><span class="line">   [</span><br><span class="line">      <span class="string">"1"</span>,</span><br><span class="line">      <span class="string">"0"</span>,</span><br><span class="line">      <span class="string">"0"</span></span><br><span class="line">   ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><a href="http://pegjs.org/" target="_blank" rel="external">PEG.js</a> was able to parse successfully, if you provide an invalid input like “$100$” it will show a parser error. </p>
+<p>Note if you want to just get the value from that text (“100” from “$100”), the output that we got is not that useful. In order extract only the required values, parsing expression allows to write custom JavaScript expressions inside the curly braces (“{“ and “}”). Updating <em>rule</em> <strong>Text</strong> like below will return just the value “100”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Text&#10; = &#34;$&#34; n:Number&#10; &#123; return n.join(&#34;&#34;); &#125;</span><br></pre></td></tr></table></figure>
+<p>Two changes we have made to the previous <em>rule</em></p>
+<ol>
+<li><strong>n:</strong>number - added a prefix <strong><em>n</em></strong> to <em>rule</em> <strong>Number</strong><br> Here we are assigning the match result of <em>rule</em> <strong>Number</strong> to a variable called <strong><em>n</em></strong></li>
+<li><code>{ return n.join(&quot;&quot;); }</code><br> JavaScript statement inside the curly brace call <code>join</code> method on the variable <strong><em>n</em></strong>. In this case variable <strong><em>n</em></strong> contains an array of characters, so calling <code>join</code> on that will concatenate and produce a string which returned as the result of <em>rule</em> <strong>Text</strong></li>
+</ol>
+<h2 id="Parsing_Grocery_List">Parsing Grocery List</h2><p>Take some more complex example where you want to parse grocery list and return the result in a JSON format like below where quantity should be in grams</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line"> &#123; "<span class="attribute">name</span>": <span class="value"><span class="string">"Onion"</span></span>, "<span class="attribute">quantity</span>": <span class="value"><span class="number">1000</span> </span>&#125;,</span><br><span class="line"> &#123; "<span class="attribute">name</span>": <span class="value"><span class="string">"Tomatoes"</span></span>, "<span class="attribute">quantity</span>": <span class="value"><span class="number">500</span> </span>&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>Grocery list text will be in the following format - where the quantity can be in <em>kg</em> or <em>gm</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Onion 1kg&#10;Tomatoes 500gm&#10;Beans 1kg</span><br></pre></td></tr></table></figure>
+<p>Please try for yourself and share your grammar. </p>
+<p>Here is the grammar I have created to do this; Below JsFiddle is interactive you can change grammar and grocery list, clicking on <strong>Parse</strong> button will show the result.</p>
+<iframe width="100%" height="675" src="http://jsfiddle.net/1u0ug5wd/embedded/result/light" frameborder="0" allowfullscreen></iframe>
+<p>Hope this article was helpful. Please share your thoughts and comments.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2015/10/13/Build-Parsers-using-PEG-js/" data-id="cifp5fhha0000zokt0rp3e9y6" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2015/10/13/Build-Parsers-using-PEG-js/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-A-Different-Way-to-Organize-JavaScripts-in-ASP-Net-MVC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/10/07/A-Different-Way-to-Organize-JavaScripts-in-ASP-Net-MVC/" class="article-date">
@@ -577,70 +647,6 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/" class="article-date">
-  <time datetime="2011-12-17T06:33:16.000Z" itemprop="datePublished">2011-12-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/">Integrating BrowserID In To Your ASP.NET MVC Application</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>BrowserID</em> is a decentralized identity system which verifies the ownership of an email address in a secure manner, without the use of any application specific authentication mechanism. Which means, you don’t need to provide an login forms in your application, instead use BrowserID feature.</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2011/12/20111217024113_BrowserID_4.png" alt="BrowserId screenshot"></p>
-<p>I am not going to explain in detail about this, but you can follow the links below to know more about it</p>
-<ul>
-<li><a href="https://browserid.org/" target="_blank" rel="external">Official website</a></li>
-<li><a href="https://github.com/mozilla/browserid/wiki/How-to-Use-BrowserID-on-Your-Site" target="_blank" rel="external">How to Use BrowserID on Your Site</a></li>
-<li><a href="http://lloyd.io/how-browserid-works/" target="_blank" rel="external">How BrowserID Works</a></li>
-</ul>
-<p>I have created demo application to show how it could be integrated into ASP.NET MVC (it could applied to ASP.NET Forms also) application.</p>
-<ul>
-<li><a href="http://nbrowserid.apphb.com/" target="_blank" rel="external">Demo app</a></li>
-<li><a href="https://github.com/cvrajeesh/NBrowserID" target="_blank" rel="external">Demo source code</a></li>
-</ul>
-<h3 id="How_the_Demo_Application_works">How the Demo Application works</h3><p>In this demo, <a href="http://nbrowserid.apphb.com/Secret" target="_blank" rel="external">Secret page</a> link can only accessed if you have logged into the application. In order to login I have provided a <em>Sign in</em> button, like most of the applications, but when you click on it. It will open a pop-up window (make sure you have disable pop-up blockers), which is a URL from <a href="https://browserid.org" target="_blank" rel="external">https://browserid.org</a> not from my application. If you don’t have a BrowserID create one, otherwise enter the Email address and Password. Then follow the steps and finally click on the <em>Sign in</em> button, which log you into the application and from there you can access the <a href="http://nbrowserid.apphb.com/Secret" target="_blank" rel="external">Secret page</a> link.</p>
-<h3 id="How_to_implement_this_in_ASP-NET_MVC">How to implement this in ASP.NET MVC</h3><p><strong>Enable BrowserID in your application : </strong></p>
-<p>Include the BrowserID javascript file <a href="https://browserid.org/include.js" target="_blank" rel="external">https://browserid.org/include.js</a> to your master page<br><code>&lt;script src=&quot;@Url.Content(&quot;https://browserid.org/include.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></p>
-<p><strong>Identify the User : </strong></p>
-<p>Instead of displaying a login form on your site which takes a username and password, it uses the BrowserID JavaScript API when the user clicks your sign-in button. For that I have added the below script to the <em>_LogOnPartial.cshtml</em> which comes with the ASP.NET MVC application you have created</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">'#login'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      navigator.id.getVerifiedEmail(gotVerifiedEmail);</span><br><span class="line">  &#125;);</span><br><span class="line">.....</span><br><span class="line">.....</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>Upon a successful sign-in, you’ll be called back with an assertion, a string containing a signed claim that proves the user is who they say they are. Which is passed to a method called <code>gotVerifiedEmail</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a handler that is passed an assertion after the user logs in via the</span></span><br><span class="line"><span class="comment">// browserid dialog</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gotVerifiedEmail</span>(<span class="params">assertion</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// got an assertion, now send it up to the server for verification</span></span><br><span class="line">    <span class="keyword">if</span> (assertion !== <span class="literal">null</span>) &#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'POST'</span>,</span><br><span class="line">            url: <span class="string">'/Account/LogOn'</span>,</span><br><span class="line">            data: &#123; assertion: assertion &#125;,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res, status, xhr</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                    loggedIn(res.email);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            error: <span class="function"><span class="keyword">function</span> (<span class="params">res, status, xhr</span>) </span>&#123;</span><br><span class="line">                alert(<span class="string">"login failure"</span> + res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Which then sends a POST Request to the <code>LogOn</code> method on the Account controller, for verifying the assertion is correct or not. If it is a verified correctly, we will set up a forms authentication cookie so that ASP.NET feels that user has logged in to the application. Then returns the Email address back.</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[HttpPost]</span><br><span class="line"><span class="function"><span class="keyword">public</span> ActionResult <span class="title">LogOn</span>(<span class="params"><span class="keyword">string</span> assertion</span>)</span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> authentication = <span class="keyword">new</span> BrowserIDAuthentication();</span><br><span class="line">    <span class="keyword">var</span> verificationResult = authentication.Verify(assertion);</span><br><span class="line">    <span class="keyword">if</span> (verificationResult.IsVerified)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">string</span> email = verificationResult.Email;</span><br><span class="line">        FormsAuthentication.SetAuthCookie(email, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">return</span> Json(<span class="keyword">new</span> &#123; email &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Json(<span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>In order to do the verification, we post the assertion to the URL provided by the Identity Authority itself (<a href="https://browserid.org/verify" target="_blank" rel="external">https://browserid.org/verify</a> in this case), which will give a valid response if it is valid. The Verify method looks like this</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> VerificationResult <span class="title">Verify</span>(<span class="params"><span class="keyword">string</span> assertion</span>)</span><br><span class="line"></span>&#123;</span><br><span class="line">    JObject verificationResult = <span class="keyword">this</span>.GetVerificationResult(assertion);</span><br><span class="line">    <span class="keyword">string</span> email = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">bool</span> verified = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (verificationResult != <span class="keyword">null</span> &amp;&amp; verificationResult[<span class="string">"status"</span>].ToString() == <span class="string">"okay"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        email = verificationResult[<span class="string">"email"</span>].ToString();</span><br><span class="line">        verified = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> VerificationResult &#123;Email = email, IsVerified = verified &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> Gets the verification result from Identity Authority.</span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;param name="assertion"&gt;</span>The assertion.<span class="xmlDocTag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;returns&gt;</span><span class="xmlDocTag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> JObject <span class="title">GetVerificationResult</span>(<span class="params"><span class="keyword">string</span> assertion</span>)</span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">// Build he request</span></span><br><span class="line">    <span class="keyword">var</span> req = (HttpWebRequest)WebRequest.Create(IdentityAuthorityVerificationUrl);</span><br><span class="line">    req.Method = <span class="string">"POST"</span>;</span><br><span class="line">    req.ContentType = <span class="string">"application/x-www-form-urlencoded"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (HttpContext.Current == <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullReferenceException(<span class="string">"HttContext is null. Please make sure that, your application is running in a web scenario"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Build the data for posting</span></span><br><span class="line">    <span class="keyword">var</span> payload = <span class="keyword">string</span>.Format(<span class="string">"assertion=&#123;0&#125;&amp;audience=&#123;1&#125;"</span>, assertion, HttpContext.Current.Request.Headers[<span class="string">"Host"</span>]);</span><br><span class="line">    <span class="keyword">byte</span>[] payloadInBytes = Encoding.UTF8.GetBytes(payload);</span><br><span class="line">    req.ContentLength = payloadInBytes.Length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> dataStream = req.GetRequestStream();</span><br><span class="line">    dataStream.Write(payloadInBytes, <span class="number">0</span>, payloadInBytes.Length);</span><br><span class="line">    dataStream.Close();</span><br><span class="line"></span><br><span class="line">    JObject result = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> res = req.GetResponse();</span><br><span class="line">    dataStream = res.GetResponseStream();</span><br><span class="line">    <span class="keyword">if</span> (dataStream != <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> responseData = <span class="keyword">new</span> StreamReader(dataStream).ReadToEnd();</span><br><span class="line">        res.Close();</span><br><span class="line">        dataStream.Close();</span><br><span class="line">        result = JObject.Parse(responseData);</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        res.Close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Hope this will help you to setup an authentication system to your application very easily and in a more secure way.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/" data-id="ciffni8sn000lisktcedznx0k" class="article-share-link">Share</a>
-      
-        <a href="http://rajeeshcv.com/2011/12/17/Integrating-BrowserID-In-To-Your-ASP-NET-MVC-Application/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -660,7 +666,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -670,6 +676,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/10/13/Build-Parsers-using-PEG-js/">Build Parsers using PEG.js</a>
+          </li>
         
           <li>
             <a href="/2015/10/07/A-Different-Way-to-Organize-JavaScripts-in-ASP-Net-MVC/">A Different Way to Organize JavaScripts in ASP.Net MVC</a>
@@ -685,10 +695,6 @@ ga('send', 'pageview');
         
           <li>
             <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
-          </li>
-        
-          <li>
-            <a href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/">EmberJS - How to Detect User Inactivity</a>
           </li>
         
       </ul>

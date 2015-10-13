@@ -84,6 +84,52 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-Comet-a-k-a-Server-Pushing" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/20/Comet-a-k-a-Server-Pushing/" class="article-date">
+  <time datetime="2009-12-20T05:20:23.000Z" itemprop="datePublished">2009-12-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2009/12/20/Comet-a-k-a-Server-Pushing/">Comet a.k.a Server Pushing</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Have you ever thought about how chatting in Gmail works? I think it works using a programming technique called <code>Comet</code>.</p>
+<p>What is comet programming</p>
+<blockquote><p>In web development, Comet is a neologism to describe a web application model in which a long-held HTTP request allows a web server to push data to a browser, without the browser explicitly requesting it. Comet is an umbrella term for multiple techniques for achieving this interaction. All these methods rely on features included by default in browsers, such as JavaScript, rather than on non-default plugins</p>
+<footer><strong>Wikipedia</strong></footer></blockquote>
+<p>Last few days, I was reading about this technology and thought about sharing the information with you all. Please find the attached sample application which demonstrates how comet works using Asp.Net (Note: Right now it works only in firefox. Fixes or patches to make it work in IE/Safari.. or all the browsers in this world are welcome J )</p>
+<blockquote>
+<p>Please download the demo from <a href="http://cdn.rajeeshcv.com/download/Comet.zip" target="_blank" rel="external">here</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://rajeeshcv.com/2009/12/20/Comet-a-k-a-Server-Pushing/" data-id="ciffni8vp000wiskt1ggnlmn9" class="article-share-link">Share</a>
+      
+        <a href="http://rajeeshcv.com/2009/12/20/Comet-a-k-a-Server-Pushing/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Tip-for-Writing-Better-NUnit-Test-Cases" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2009/12/18/Tip-for-Writing-Better-NUnit-Test-Cases/" class="article-date">
@@ -531,65 +577,6 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-How-Web-Servers-Identify-Your-Session" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2008/06/12/How-Web-Servers-Identify-Your-Session/" class="article-date">
-  <time datetime="2008-06-12T18:17:43.000Z" itemprop="datePublished">2008-06-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2008/06/12/How-Web-Servers-Identify-Your-Session/">How Web Servers Identify Your Session?</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>I think, you have all created <code>session</code> variables inside an asp.net application. Then how the web server knows you are the same guy created that session when successive request goes to the server.</p>
-<p>Before explain this, we have to think that every request that we sent from a web browser is considered as a new request by the IIS. This is the behavior of every web application i.e. the state less nature. For example if you open a url, first the browser sent a request for the default document. Then the browser parses the HTML response and it sends another set of requests based on the required images, scripts that are included in that page.</p>
-<p>Below you could see, the different requests that sent by my browser when I opened my blog</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2008/06/image-4.jpg" alt="Fiddler Trace"></p>
-<p>Some think <strong>State less</strong> nature is the biggest drawback of a web application, but in my view this is an advantage because you could distribute your application as you like, because it is not tightly coupled to a particular request.</p>
-<p>Developing <strong>State aware</strong> application is one of the main challenge involved in any web development. For developing a <strong>State aware</strong> application, you don’t need to do much. All most all server side scripting languages supports creation of <code>Session</code> variables. Session variables are created in the memory location where your web server runs and it is created per user basis. That means, <em>User1</em> creates a session variable but <em>User2</em> can’t modify that particular session variable, he can only work with the session variables he created. Ok thats about session, but how your server identify this users?</p>
-<p>I will explain that with an example, for that I have created a simple website with one page and I have placed two buttons in that page. When user click on the <em>Button1</em>, a session variable is set. If the user click on the <em>Buttton2</em>, the value from session variable is written back on the page using <code>Response.Write(..)</code> method.</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2008/06/image-5.jpg" alt="Test Page"></p>
-<p>When I first hit this url, the HTTP headers of request and response looks like below</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2008/06/image-6.jpg" alt="First request headers"></p>
-<p><img src="http://cdn.rajeeshcv.com/images/2008/06/image-8.jpg" alt="First response header"></p>
-<p>This request simply means, we are looking for a <em>Default.aspx</em> page and the web server is returning that page. Ok. Now we click on <em>Button 1</em>, at that time if you look at the HTTP request header</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2008/06/image-7.jpg" alt="Button1 click request headers"></p>
-<p>From that header you could understand that, it is a simple form post header. As I said earlier, we are setting a session variable. Because of that, your server will create id for identifying your session and that value is send back as a cookie to browser through response header. Below is the response header of <em>Button 1</em> click</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2008/06/image-9.jpg" alt="Button1 click response headers"></p>
-<p>In that response, you could see a <code>Set-Cookie</code> header with cookie name <strong>AS.NET_SessionId</strong> with some value is sent back to the browser. From now onwards, each an every request send from that page will have this cookie value. To show that, we click on the <em>Button 1</em> again, see below is the request header for that</p>
-<p><img src="http://cdn.rajeeshcv.com/images/2008/06/image-10.jpg" alt="Button1 click second time request headers"></p>
-<p>There your browser passes the <strong>AS.NET_SessionId</strong> cookie value to the server through each and every request. With this cookie value only your server identify the sessions, Hope you have got some idea about this.</p>
-<blockquote>
-<p>Here I have used <strong>Fiddler</strong> as the tool for intercepting these request/response.<br>If you need this tool please goto <a href="http://www.telerik.com/fiddler" target="_blank" rel="external">http://www.telerik.com/fiddler</a> and download it.</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://rajeeshcv.com/2008/06/12/How-Web-Servers-Identify-Your-Session/" data-id="ciffni8t3000pisktx4rmbmeo" class="article-share-link">Share</a>
-      
-        <a href="http://rajeeshcv.com/2008/06/12/How-Web-Servers-Identify-Your-Session/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -609,7 +596,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">December 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">April 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">February 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">December 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">June 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/04/">April 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">February 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">January 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">December 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">June 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">May 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">October 2008</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">June 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">May 2008</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -619,6 +606,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/10/13/Build-Parsers-using-PEG-js/">Build Parsers using PEG.js</a>
+          </li>
         
           <li>
             <a href="/2015/10/07/A-Different-Way-to-Organize-JavaScripts-in-ASP-Net-MVC/">A Different Way to Organize JavaScripts in ASP.Net MVC</a>
@@ -634,10 +625,6 @@ ga('send', 'pageview');
         
           <li>
             <a href="/2014/06/22/EmberJS-Error-Logging-in-Production/">EmberJS Error Logging in Production</a>
-          </li>
-        
-          <li>
-            <a href="/2014/06/12/EmberJS-How-to-Detect-User-Inactivity/">EmberJS - How to Detect User Inactivity</a>
           </li>
         
       </ul>
