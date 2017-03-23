@@ -1,6 +1,7 @@
 title: "It’s Better to Automate, Instead of Checklists"
 date: 2010-09-20 12:46:38
 tags:
+- Misc
 ---
 
 In my day to day activities I have seen many checklists like

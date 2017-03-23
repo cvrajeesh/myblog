@@ -1,6 +1,7 @@
 title: "Attach to Visual Studio Development Server with One Click"
 date: 2011-11-26 11:44:24
 tags:
+- Visual Studio
 ---
 
 In my day to day work, during the development I had to attach an ASP.NET application to the development server (Cassini) several times in order to debug and fix a problem.

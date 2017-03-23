@@ -1,6 +1,7 @@
 title: "User Experience Makes Applications Stand-out"
 date: 2010-06-01 12:41:03
 tags:
+- Misc
 ---
 
 What makes your application different from others? I strongly feel the user experience that you provides plays an important role to be successful. Some of us might have felt that(at least myself), you woke up one day with a brand new idea but later you realize that somebody had implemented that an year back. Which is a frustrated feeling, I have been to that situation so many times. So even if that idea exists already, how to make that idea a successful one.

@@ -1,6 +1,7 @@
 title: "ASP.Net MVC - Conditional Rendering"
 date: 2010-01-03 11:15:15
 tags:
+- ASP.NET MVC
 ---
 
 We come across situations like rendering elements based on the conditions in Model. For example, in the view if we want to show a TextBox if some property is true. A normal way of doing this is like below

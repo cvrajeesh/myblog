@@ -1,6 +1,7 @@
 title: "Run Gulp Tasks in a Predefined Order"
 date: 2015-05-07 18:26:28
 tags:
+- WebDev
 ---
 
 [Gulp] is build automation tool which runs on top of Node. In my current project I had to execute set of tasks in a predefined order, in which some of the tasks can be run in parallel to improve the efficiency.

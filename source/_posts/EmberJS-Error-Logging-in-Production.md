@@ -1,6 +1,8 @@
 title: "EmberJS Error Logging in Production"
 date: 2014-06-22 12:52:57
 tags:
+- EmberJS
+- SPA
 ---
 
 In order to log all errors in an [EmberJS] application, [EmberJS] provides a global hook called `onerror`

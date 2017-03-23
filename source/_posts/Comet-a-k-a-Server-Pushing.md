@@ -1,6 +1,7 @@
 title: "Comet a.k.a Server Pushing"
 date: 2009-12-20 10:50:23
 tags:
+- ASP.NET
 ---
 
 Have you ever thought about how chatting in Gmail works? I think it works using a programming technique called `Comet`.

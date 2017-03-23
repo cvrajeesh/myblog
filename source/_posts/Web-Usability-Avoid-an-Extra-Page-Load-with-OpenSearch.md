@@ -1,6 +1,8 @@
 title: "Web Usability – Avoid an Extra Page Load with OpenSearch"
 date: 2011-04-05 14:40:55
 tags:
+- WebDev
+- Misc
 ---
 
 Now a days most of the websites, blogs or any applications that are on internet will have a search functionality which is great!!!. Before the Omnibox concept was introduced by google chrome, if we want to search something in google, as a user I need to go to www.google.com and type the search query. After the introduction of Omnibox, user don’t need to open the google website instead you could do the search from the address bar itself. From the usability point of view, it is a great functionality IMHO.

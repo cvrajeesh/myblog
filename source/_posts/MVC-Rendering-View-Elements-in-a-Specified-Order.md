@@ -1,6 +1,7 @@
 title: "MVC - Rendering View Elements in a Specified Order"
 date: 2011-02-27 14:31:29
 tags:
+ - ASP.NET MVC
 ---
 
 In my current project, I had to render elements in the view based on a setting provided by the model(basically it is a configurable thing). Few clients need view element to be rendered in a particular order and few others in a different way. What we did was, saved this elements order in a settings file which could be changed based on the clients. Then created an extension to render this based on the order.

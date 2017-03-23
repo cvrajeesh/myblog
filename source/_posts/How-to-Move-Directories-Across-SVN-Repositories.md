@@ -1,6 +1,7 @@
 title: "How to Move Directories Across SVN Repositories"
 date: 2011-11-15 15:11:45
 tags:
+- Misc
 ---
 
 

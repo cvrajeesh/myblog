@@ -1,6 +1,7 @@
 title: "ASP.Net MVC - Conditional Rendering Partial Views"
 date: 2010-01-21 11:26:47
 tags:
+- ASP.NET MVC
 ---
 
 **Update:** Later I found a cleaner and simple approach to do the same – read this post {% post_link ASP-Net-MVC–Conditional-Rndering-Partial-Views-with-Action-T-Delegate "ASP.Net MVC – Conditional rendering Partial Views with Action<T> delegate" %}

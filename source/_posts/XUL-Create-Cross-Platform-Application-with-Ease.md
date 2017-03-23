@@ -1,6 +1,7 @@
 title: "XUL - Create Cross Platform Application with Ease"
 date: 2009-05-19 01:39:43
 tags:
+- Misc
 ---
 
 You want to create simple GUI cross platform application without knowing the high level programming languages like C++, Java, C#~(using mono)? XUL is that answer.

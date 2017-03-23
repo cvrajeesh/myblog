@@ -1,6 +1,8 @@
 title: A Different Way to Organize JavaScripts in ASP.Net MVC
 date: 2015-10-07 20:57:54
 tags:
+- JavaScript
+- ASP.NET MVC
 ---
 
 New JavaScript SPA(Single Page Application) frameworks are getting written day by day, generally one core feature these frameworks solves is how to organizing the code so that maintaining it in the future won't be a night mare. When it comes to organizing JavaScripts in a large scale server side application, resources available is very less SPA frameworks.
@@ -135,7 +137,7 @@ export class Home extends Component {
 ##Child Components
 A page will have many child components as well. To create these child component element associated with that component should have a `data-js-component` attribute.
 
-Below code shows `Popover` component which initializes the bootstrap popover 
+Below code shows `Popover` component which initializes the bootstrap popover
 
 ```typescript
 import { Component } from "Component"
@@ -153,8 +155,8 @@ export class Popover extends Component {
 In order apply this in the razor view, I will be setting `data-js-component` attribute like below
 
 ```html
-<a  href="#" 
-    class="btn btn-primary btn-lg js-component" 
+<a  href="#"
+    class="btn btn-primary btn-lg js-component"
     data-js-component="Popover">
     Learn more &raquo;
 </a>

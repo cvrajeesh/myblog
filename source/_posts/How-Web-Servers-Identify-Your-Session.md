@@ -1,6 +1,8 @@
 title: "How Web Servers Identify Your Session?"
 date: 2008-06-12 23:47:43
 tags:
+- Misc
+- ASP.NET
 ---
 
 I think, you have all created ```session``` variables inside an asp.net application. Then how the web server knows you are the same guy created that session when successive request goes to the server.

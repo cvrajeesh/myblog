@@ -1,6 +1,8 @@
 title: "Tip for Writing Better NUnit Test Cases"
 date: 2009-12-18 10:43:04
 tags:
+- C#
+- QA
 ---
 
 If you have method, which does the string reverse. So normally we writes test cases in Nunit something like this

@@ -1,6 +1,7 @@
 title: "Visual Studio : Debugging Silverlight Application with Chrome and Firefox"
 date: 2013-08-03 12:43:01
 tags:
+- Silverlight
 ---
 
 Here is a tip if you want to debug Silverlight applications from Visual Studio 2012 if it is running in Google Chrome or Firefox

@@ -1,6 +1,7 @@
 title: "Logging Execution Time Using AOP"
 date: 2010-02-27 11:42:22
 tags:
+- C#
 ---
 
 What happens if your client complains that your application is running very slow!!! or in your load/stress testing you found that some functionalities are very slow in executing than expected. This is the time where you go for profiling the execution, to analyse the root cause of these issues.

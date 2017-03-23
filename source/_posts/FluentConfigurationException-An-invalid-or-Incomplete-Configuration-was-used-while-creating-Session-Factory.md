@@ -1,6 +1,7 @@
 title: "FluentConfigurationException: An invalid or Incomplete Configuration was used while creating Session Factory"
 date: 2010-01-01 11:04:13
 tags:
+- NHibernate
 ---
 
 I got this exception when I tried to run my Repository tests and couldn't find the exact reason why these tests failed.

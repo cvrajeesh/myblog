@@ -1,6 +1,7 @@
 title: "JQueryUI Datepicker in ASP.Net MVC"
 date: 2010-02-28 12:10:57
 tags:
+- ASP.NET MVC
 ---
 
 Datepicker is nice and cool plugin for displaying the calendar with ease. It is very easy to use JQuery plugin, it comes as part of JQueryUI library, so if you want to use this – first download JQueryUI from http://jqueryui.com/download and also download JQuery(http://jquery.com/download/) if you haven’t done yet.

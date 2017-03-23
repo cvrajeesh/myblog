@@ -1,6 +1,8 @@
 title: "Automating WYSIWYG Editors using Selenium Web Driver"
 date: 2012-12-01 12:28:23
 tags:
+- UI Testing
+- QA
 ---
 
 Automating web application using [selenium for acceptance/integration tests][1] is very easy. Recently I have faced few issues when automating a page with a JavaScript based [WYSIWYG] editors.

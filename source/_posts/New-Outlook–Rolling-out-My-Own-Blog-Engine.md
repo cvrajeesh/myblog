@@ -1,6 +1,7 @@
 title: "New Outlook – Rolling out My Own Blog Engine"
 date: 2011-10-27 14:51:11
 tags:
+- Projects
 ---
 
 For the last couple of years I was using wordpress as my blogging platform, it is an awesome framework but finally I decided to move away from it and created my own blog engine(Rhyble), on which this blog is running now.

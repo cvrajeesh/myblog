@@ -1,6 +1,7 @@
 title: "ASP.NET AJAX - Passing JSON Object from Client to Server"
 date: 2008-10-27 01:17:58
 tags:
+- ASP.NET
 ---
 
 > {% post_link ASP-NET-AJAX-Calling-Server-Side-methods-from-Client-Side "Part 1"%} - Calling Server Side methods from Client Side

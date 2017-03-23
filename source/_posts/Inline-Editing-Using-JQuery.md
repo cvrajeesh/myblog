@@ -1,6 +1,7 @@
 title: "Inline Editing Using JQuery"
 date: 2009-06-25 10:22:25
 tags:
+- WebDev
 ---
 
 Here I wanted to show you the flexibility of JQuery. Below is a HTML code that generates a grid with two rows and ten columns.

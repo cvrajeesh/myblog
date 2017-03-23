@@ -1,6 +1,7 @@
 title: "SQL Injection Attack Detection Tool"
 date: 2008-06-26 00:08:44
 tags:
+- Misc
 ---
 
 Today I found a tool called **Scrawlr** that will help you to detect **SQL injection** loop holes in your web application. I hope it will be a good add-on to your archery against security attacks.

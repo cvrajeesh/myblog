@@ -1,6 +1,8 @@
 title: Build Parsers using PEG.js
 date: 2015-10-13 14:41:03
 tags:
+- JavaScript
+- Misc
 ---
 
 Writing parser from scratch is a tedious task. Recently I came across a simple parser generator for JavaScript called [PEG.js]
@@ -13,7 +15,7 @@ In order to create a parser, provide a grammar as the input and [PEG.js] will bu
 
 [PEG.js] grammar has a particular syntax, you can learn more about it from http://pegjs.org/documentation#grammar-syntax-and-semantics. If you are familiar with regular expression it will easy understand.
 
-Take a simple example for writing grammar which will parse texts like "$100", "$150" etc... 
+Take a simple example for writing grammar which will parse texts like "$100", "$150" etc...
 
 Example text follow a pattern where currency symbol i.e. "$" is followed by a number. Translating this into [pEG.js] grammar looks like this
 
@@ -29,7 +31,7 @@ Digit
 ```
 Every grammar has set of *rules*, in this case we have three rules. Every rule has a *name* that identify the rule and a parsing expression. Rule name is followed by "=" then parsing expression.
 
-1. Rule **Text** 
+1. Rule **Text**
  	Parsing expression for this rule is *"$" Number*. This parsing expression says "Match text that has literal "$" followed by a *Number*". Note *Number* is name of a rule.
 2. Rule **Number**
 	Parsing expression "Digit+" means - match text that has one or more *Digit*.
@@ -48,7 +50,7 @@ Hope you got basic idea how a grammar is created. [PEG.js] provides playground w
    ]
 ]
 ```
-[PEG.js] was able to parse successfully, if you provide an invalid input like "$100$" it will show a parser error. 
+[PEG.js] was able to parse successfully, if you provide an invalid input like "$100$" it will show a parser error.
 
 Note if you want to just get the value from that text ("100" from "$100"), the output that we got is not that useful. In order extract only the required values, parsing expression allows to write custom JavaScript expressions inside the curly braces ("{" and "}"). Updating *rule* **Text** like below will return just the value "100"
 
@@ -60,7 +62,7 @@ Text
 Two changes we have made to the previous *rule*
 1. **n:**number - added a prefix ***n*** to *rule* **Number**
 	Here we are assigning the match result of *rule* **Number** to a variable called ***n***
-2. `{ return n.join(""); }` 
+2. `{ return n.join(""); }`
 	JavaScript statement inside the curly brace call `join` method on the variable ***n***. In this case variable ***n*** contains an array of characters, so calling `join` on that will concatenate and produce a string which returned as the result of *rule* **Text**
 
 ##Parsing Grocery List
@@ -79,7 +81,7 @@ Onion 1kg
 Tomatoes 500gm
 Beans 1kg
 ```
-Please try for yourself and share your grammar. 
+Please try for yourself and share your grammar.
 
 Here is the grammar I have created to do this; Below JsFiddle is interactive you can change grammar and grocery list, clicking on **Parse** button will show the result.
 

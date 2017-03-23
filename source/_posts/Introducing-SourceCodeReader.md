@@ -1,6 +1,7 @@
 title: "Introducing SourceCodeReader"
 date: 2012-08-02 12:21:32
 tags:
+- Projects
 ---
 
 Have you ever tried to understand a project just by going through the source code?

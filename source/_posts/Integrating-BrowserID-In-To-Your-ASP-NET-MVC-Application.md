@@ -1,6 +1,8 @@
 title: "Integrating BrowserID In To Your ASP.NET MVC Application"
 date: 2011-12-17 12:03:16
 tags:
+- ASP.NET
+- Misc
 ---
 
 *BrowserID* is a decentralized identity system which verifies the ownership of an email address in a secure manner, without the use of any application specific authentication mechanism. Which means, you don’t need to provide an login forms in your application, instead use BrowserID feature.

@@ -1,6 +1,8 @@
 title: "Stay Away from Request.Url"
 date: 2011-10-30 15:00:09
 tags:
+- ASP.NET MVC
+- Misc
 ---
 
 The title might be misleading but I will explain why we shouldn’t use the Request.Url in any asp.net application directly.

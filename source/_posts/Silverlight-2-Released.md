@@ -1,6 +1,7 @@
 title: "Silverlight 2 Released"
 date: 2008-10-15 00:34:16
 tags:
+- Silverlight
 ---
 
 Silverlight 2 is out now with new features like rich set of controls, improved Text Rendering capabilities, rich networking support including calling secured(SSL) services etc...

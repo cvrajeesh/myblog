@@ -1,6 +1,7 @@
 title: "One of the Top E-Commerce Website in India Stores Passwords Incorrectly"
 date: 2012-12-06 12:36:44
 tags:
+- Misc
 ---
 
 This incident made me feel very bad – couple of weeks before I ordered a product from [naaptol] a well-known E-Commerce website in India.  It was the first time I was ordering something from them. So I had to register first, after the registration was completed got a confirm email from them

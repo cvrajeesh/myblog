@@ -1,6 +1,7 @@
 title: "Creating a Custom Silverlight Control"
 date: 2008-05-01 22:27:07
 tags:
+- Silverlight
 ---
 
 In this post, I will explain how to create a custom control in silverlight. The control we create is a simple control which will draw a circle, the radius of the circle is controlled through the exposed public property.

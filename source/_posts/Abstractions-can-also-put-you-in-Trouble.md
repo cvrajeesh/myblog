@@ -1,6 +1,7 @@
 title: "Abstractions can also put you in Trouble"
 date: 2011-11-19 15:25:05
 tags:
+- Misc
 ---
 
 We all have enjoyed the beauty of abstracting out functionality, so that it simplifies the underlying complexity. Sometimes it can come back and hit you on the forehead like a boomerang if we don’t know what is going underneath those hidden layers.

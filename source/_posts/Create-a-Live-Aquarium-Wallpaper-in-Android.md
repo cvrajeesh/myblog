@@ -1,6 +1,8 @@
 title: "Create a Live Aquarium Wallpaper in Android"
 date: 2010-12-27 12:56:03
 tags:
+- Android
+- Java
 ---
 
 ![Final Result 1](http://cdn.rajeeshcv.com/images/2010/12/image_thumb.png)

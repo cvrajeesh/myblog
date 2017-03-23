@@ -1,6 +1,7 @@
 title: "Code Generation - Easy Way"
 date: 2009-06-05 01:44:41
 tags:
+- Visual Studio
 ---
 
 Recently I read about Text [Template Transformation Toolkit](http://msdn2.microsoft.com/en-us/library/bb126445.aspx)(T4), I was really amazed by this because I thought only CodeDOM was the only way to generate code.

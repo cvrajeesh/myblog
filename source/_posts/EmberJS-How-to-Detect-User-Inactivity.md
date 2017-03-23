@@ -1,6 +1,7 @@
 title: "EmberJS - How to Detect User Inactivity"
 date: 2014-06-12 12:47:49
 tags:
+- EmberJS
 ---
 
 **Scenario:**

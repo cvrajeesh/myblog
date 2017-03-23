@@ -1,6 +1,7 @@
 title: "Google Chrome Not Rendering the Checkboxes Properly"
 date: 2008-10-05 00:26:02
 tags:
+- Misc
 ---
 
 Google chrome(0.2.149.30) has got some problem in rendering the checkboxes. Today I thought about buying a new laptop, so I was searching for a laptop that will fit into my budget and requirements. And I came across a website called http://www.compareindia.com/products/laptops/ , I was using Google chrome for browsing, but when viewed that page it was like this
