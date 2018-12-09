@@ -13,7 +13,7 @@ disqus_shortname: rajeeshcv
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://rajeeshcv.com
+url: https://rajeeshcv.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

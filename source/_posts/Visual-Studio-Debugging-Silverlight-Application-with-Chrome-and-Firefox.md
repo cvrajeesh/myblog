@@ -13,7 +13,7 @@ Here is a tip if you want to debug Silverlight applications from Visual Studio 2
 3. Select that process and click the *Attach* button
 
 Here is screenshot from my machine
-![Visual Studio attach to Silverlight in Chrome](http://cdn.rajeeshcv.com/images/2013/08/201308301039_chrome_silverlight_debugging.png)
+![Visual Studio attach to Silverlight in Chrome](//static.rajeeshcv.com/images/2013/08/201308301039_chrome_silverlight_debugging.png)
 
 **Mozilla Firefox :**
 
@@ -24,6 +24,6 @@ Firefox has a slightly different approach
 3. Select that process and click the *Attach* button
 
 Here is the screenshot
-![Visual Studio attach to Silverlight in Firefox](http://cdn.rajeeshcv.com/images/2013/08/201308301039_firefox_silverlight_debugging.png)
+![Visual Studio attach to Silverlight in Firefox](//static.rajeeshcv.com/images/2013/08/201308301039_firefox_silverlight_debugging.png)
 
 Voila!!! now you are able to get the breakpoints in Visual Studio

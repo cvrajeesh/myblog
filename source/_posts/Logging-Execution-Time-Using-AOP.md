@@ -278,7 +278,7 @@ PROFILING 2010-02-26 00:20:04,865 [1] Log MethodName : SimpleMethod, ExecutionTi
 
 Please least me know, if this helped you.
 
-> Download the demo code from [here](http://cdn.rajeeshcv.com/download/ProfilingSample.zip)
+> Download the demo code from [here](//static.rajeeshcv.com/download/ProfilingSample.zip)
 
 [Log4Net]: http://logging.apache.org/log4net/
 [PostSharp]: https://www.postsharp.net

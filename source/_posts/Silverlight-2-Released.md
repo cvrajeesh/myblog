@@ -12,7 +12,7 @@ Moreover Microsoft is partnered with [Soyatec](http://www.soyatec.com/) to spons
 
 As an addition to the control set Microsoft is releasing Silverlight Toolkit by end of this month with more UI controls.
 
-![Silverlight 2 toolkit](http://cdn.rajeeshcv.com/images/2008/10/controlsppct-4-thumb.jpg)
+![Silverlight 2 toolkit](//static.rajeeshcv.com/images/2008/10/controlsppct-4-thumb.jpg)
 
 
 ### Silverlight 2 resources

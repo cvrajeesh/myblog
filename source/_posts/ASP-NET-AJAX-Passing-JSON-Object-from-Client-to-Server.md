@@ -173,4 +173,4 @@ Here is how the HTML looks like
 
 I think the above code is self explanatory, let me know if you have any difficulty in understanding this. Hope this will gave some idea about passing JSON between client and server.
 
-> I have uploaded the source code in my server and you can get it from here - http://cdn.rajeeshcv.com/download/ServerClientInteration.zip
+> I have uploaded the source code in my server and you can get it from here - //static.rajeeshcv.com/download/ServerClientInteration.zip

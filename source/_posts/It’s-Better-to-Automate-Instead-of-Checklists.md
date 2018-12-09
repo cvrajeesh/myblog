@@ -152,4 +152,4 @@ For including this in the your web project, open the project file in a text edit
 ```
 Hope this helps you.
 
-> Download code sample from [here](http://cdn.rajeeshcv.com/download/TestWebApplication.zip)
+> Download code sample from [here](//static.rajeeshcv.com/download/TestWebApplication.zip)

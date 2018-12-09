@@ -5,8 +5,8 @@ tags:
 - Java
 ---
 
-![Final Result 1](http://cdn.rajeeshcv.com/images/2010/12/image_thumb.png)
-![Final Result 2](http://cdn.rajeeshcv.com/images/2010/12/image_thumb1.png)
+![Final Result 1](//static.rajeeshcv.com/images/2010/12/image_thumb.png)
+![Final Result 2](//static.rajeeshcv.com/images/2010/12/image_thumb1.png)
 
 Few weeks ago I started learning Android programming, so this article is an outcome of that out-side office study :). Here I will be explaining – how to create a live wallpaper which looks like an aquarium with fishes swimming across the screen. The fish animation is done using sprite technique.
 

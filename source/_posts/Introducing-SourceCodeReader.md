@@ -26,15 +26,15 @@ Source code for this project can be found at https://github.com/cvrajeesh/Source
 
 Go to [SourceCodeReader][1] and enter the URL of a C# project on Github
 
-![SourceCodeReader home page](http://cdn.rajeeshcv.com/images/2012/08/20120802065851_image_thumb.png)
+![SourceCodeReader home page](//static.rajeeshcv.com/images/2012/08/20120802065851_image_thumb.png)
 
 Once you have entered a Github project link and open the project, it get the source code from the Github and present you with file browser.
 
-![SourceCodeReader project directory](http://cdn.rajeeshcv.com/images/2012/08/20120802065857_image_thumb_2.png)
+![SourceCodeReader project directory](//static.rajeeshcv.com/images/2012/08/20120802065857_image_thumb_2.png)
 
 When you navigate to a C# file you will be able to see clickable links for identifiers which takes you the file location where that is declared.
 
-![SourceCodeReader Go To Definition feature](http://cdn.rajeeshcv.com/images/2012/08/20120802065903_image_thumb_1.png)
+![SourceCodeReader Go To Definition feature](//static.rajeeshcv.com/images/2012/08/20120802065903_image_thumb_1.png)
 
 **Sample projects :**
 
