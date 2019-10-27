@@ -7,7 +7,7 @@ tags:
 
 *BrowserID* is a decentralized identity system which verifies the ownership of an email address in a secure manner, without the use of any application specific authentication mechanism. Which means, you don’t need to provide an login forms in your application, instead use BrowserID feature.
 
-![BrowserId screenshot](//static.rajeeshcv.com/images/2011/12/20111217024113_BrowserID_4.png)
+![BrowserId screenshot](/images/2011/12/20111217024113_BrowserID_4.png)
 
 I am not going to explain in detail about this, but you can follow the links below to know more about it
 

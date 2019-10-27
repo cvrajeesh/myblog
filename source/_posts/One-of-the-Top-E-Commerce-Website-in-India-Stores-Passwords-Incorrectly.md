@@ -6,7 +6,7 @@ tags:
 
 This incident made me feel very bad – couple of weeks before I ordered a product from [naaptol] a well-known E-Commerce website in India.  It was the first time I was ordering something from them. So I had to register first, after the registration was completed got a confirm email from them
 
-![Registration confirmation email from naaptol](//static.rajeeshcv.com/images/2012/12/20121206105945_naaptolregistration.png)
+![Registration confirmation email from naaptol](/images/2012/12/20121206105945_naaptolregistration.png)
 
 Oops!!! My password is in clear text.
 
@@ -18,7 +18,7 @@ After few days when I got the product which I have ordered, it reminded me about
 
 As expected, got an email from them
 
-![Forgot my password email from naaptol](//static.rajeeshcv.com/images/2012/12/20121206105945_naaptolforgotpassword.png)
+![Forgot my password email from naaptol](/images/2012/12/20121206105945_naaptolforgotpassword.png)
 
 It reads *Here is your new Login and Password* and surprisingly password they gave is same as my old password even though in the email it is mentioned that they are sending a new password. It confirmed that they are not hashing the passwords.
 

@@ -9,7 +9,7 @@ Now a days most of the websites, blogs or any applications that are on internet 
 
 From the point of google search application, they have done it smartly. As a web developer how could you provide the same usability feature to your own website. Some of the website I frequently visits has done like this.
 
-![StackOverflow Opensearch](//static.rajeeshcv.com/images/2011/04/clip_image001_thumb.png)
+![StackOverflow Opensearch](/images/2011/04/clip_image001_thumb.png)
 
 If you are in google chrome, after you type the stackoverflow.com a message will be displayed on the address bar saying that *Press Tab to search Stack Overflow*. If you press tab, you can directly type the search query in the address bar itself and pressing enter will show the results. This basically allows you to do a quick search, instead of going to the website and finding the search box and pressing search button(a long process is it? Smile)
 
@@ -36,11 +36,11 @@ After this is created, I upload it the website. In order for the browser to sens
 
 With this [ifscfinder] has got a nice quick search option in google chrome
 
-![ifscfinder opensearch](//static.rajeeshcv.com/images/2011/04/clip_image002_thumb.png)
+![ifscfinder opensearch](/images/2011/04/clip_image002_thumb.png)
 
 Firefox also detect the opensearch , which mean you could add this site to the search engine list in firefox
 
-![Firefox Opensearch](//static.rajeeshcv.com/images/2011/04/image_thumb.png)
+![Firefox Opensearch](/images/2011/04/image_thumb.png)
 
 IE9 doesn’t care about this at all(don’t know why!!!)
 

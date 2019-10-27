@@ -8,11 +8,11 @@ In my current project, I had to render elements in the view based on a setting p
 
 This is what was I was trying to explain. for  Client 1 the *Login section* to be displayed first followed by *Password reminder section*
 
-![Client 1 requirement](//static.rajeeshcv.com/images/2011/02/image_thumb.png)
+![Client 1 requirement](/images/2011/02/image_thumb.png)
 
 For Client 2 , these sections needs be ordered differently
 
-![Client 2 requirement](//static.rajeeshcv.com/images/2011/02/image_thumb1.png)
+![Client 2 requirement](/images/2011/02/image_thumb1.png)
 
 In order to achieve this, I came up with an `HtmlHelper` extension
 

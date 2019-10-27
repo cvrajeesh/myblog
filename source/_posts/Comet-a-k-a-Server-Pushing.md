@@ -1,7 +1,9 @@
 title: "Comet a.k.a Server Pushing"
 date: 2009-12-20 10:50:23
 tags:
+
 - ASP.NET
+
 ---
 
 Have you ever thought about how chatting in Gmail works? I think it works using a programming technique called `Comet`.
@@ -14,4 +16,4 @@ In web development, Comet is a neologism to describe a web application model in 
 
 Last few days, I was reading about this technology and thought about sharing the information with you all. Please find the attached sample application which demonstrates how comet works using Asp.Net (Note: Right now it works only in firefox. Fixes or patches to make it work in IE/Safari.. or all the browsers in this world are welcome J )
 
-> Please download the demo from [here](//static.rajeeshcv.com/download/Comet.zip)
+> Please download the demo from [here](/download/Comet.zip)

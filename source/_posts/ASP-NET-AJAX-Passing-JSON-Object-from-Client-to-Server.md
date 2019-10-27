@@ -1,7 +1,9 @@
 title: "ASP.NET AJAX - Passing JSON Object from Client to Server"
 date: 2008-10-27 01:17:58
 tags:
+
 - ASP.NET
+
 ---
 
 > {% post_link ASP-NET-AJAX-Calling-Server-Side-methods-from-Client-Side "Part 1"%} - Calling Server Side methods from Client Side
@@ -96,32 +98,35 @@ Here is how the HTML looks like
 ```html
 <head runat="server">
   <title>Untitled Page</title>
-  <style type="text/css">  
-    #result
-    {
+  <style type="text/css">
+    #result {
       width: 250px;
       height: 300px;
       overflow: auto;
-      border:1px solid #00d;
+      border: 1px solid #00d;
     }
   </style>
 </head>
 <body>
   <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    <asp:ScriptManager
+      ID="ScriptManager1"
+      runat="server"
+      EnablePageMethods="true"
+    >
     </asp:ScriptManager>
     <div>
-        <a href="javascript:callServerMethod()" >Call Server method</a>
-        <hr />
-        <a href="javascript:getCustomer()" >Get Customer</a>
-        <div id="result"></div>
-        <hr />
-        <div>
-          ID : <input type="text" id="custID" /><br />
-          Name : <input type="text" id="custName" /><br />
-          Adress : <input type="text" id="custAdd" /><br />
-        </div>
-        <a href="javascript:updateCustomer()" >Update customer</a><br />
+      <a href="javascript:callServerMethod()">Call Server method</a>
+      <hr />
+      <a href="javascript:getCustomer()">Get Customer</a>
+      <div id="result"></div>
+      <hr />
+      <div>
+        ID : <input type="text" id="custID" /><br />
+        Name : <input type="text" id="custName" /><br />
+        Adress : <input type="text" id="custAdd" /><br />
+      </div>
+      <a href="javascript:updateCustomer()">Update customer</a><br />
     </div>
 
     <script language="javascript" type="text/javascript">
@@ -139,26 +144,37 @@ Here is how the HTML looks like
       }
 
       function callBackGetCustomer(result) {
-        var customer = Sys.Serialization.JavaScriptSerializer.deserialize(result);
-        var content = "<br />ID :" +  customer.ID + "<br />" + "Name : " + customer.Name + "<br />" + "Address : " + customer.Address;
+        var customer = Sys.Serialization.JavaScriptSerializer.deserialize(
+          result
+        );
+        var content =
+          "<br />ID :" +
+          customer.ID +
+          "<br />" +
+          "Name : " +
+          customer.Name +
+          "<br />" +
+          "Address : " +
+          customer.Address;
         $get("result").innerHTML += content;
       }
 
-      var clientCustomer = function(id,name,add){
+      var clientCustomer = function(id, name, add) {
         this.ID = id;
         this.Name = name;
         this.Address = add;
       };
-
 
       function updateCustomer() {
         var id = $get("custID").value;
         var name = $get("custName").value;
         var address = $get("custAdd").value;
 
-        var customer = new clientCustomer(id,name,address);
-        var serializedCustomer = Sys.Serialization.JavaScriptSerializer.serialize(customer);
-        PageMethods.UpdateCustomer(serializedCustomer,callBackUpdateCustomer);
+        var customer = new clientCustomer(id, name, address);
+        var serializedCustomer = Sys.Serialization.JavaScriptSerializer.serialize(
+          customer
+        );
+        PageMethods.UpdateCustomer(serializedCustomer, callBackUpdateCustomer);
       }
 
       function callBackUpdateCustomer(result) {
@@ -173,4 +189,4 @@ Here is how the HTML looks like
 
 I think the above code is self explanatory, let me know if you have any difficulty in understanding this. Hope this will gave some idea about passing JSON between client and server.
 
-> I have uploaded the source code in my server and you can get it from here - //static.rajeeshcv.com/download/ServerClientInteration.zip
+> I have uploaded the source code in my server and you can get it from [here](/download/ServerClientInteration.zip)

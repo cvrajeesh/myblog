@@ -56,11 +56,11 @@ Now we have to execute the newly created macros on clicking on a toolbar button.
 6. If you want, you can customize the text which appears on the command button, by clicking on the *Modify Selection*
 Here it is how it looked in my machine
 
-![Adding Command to the Visual Studio Toolbar](//static.rajeeshcv.com/images/2011/11/20111126012529_AddCommand_thumb.png)
+![Adding Command to the Visual Studio Toolbar](/images/2011/11/20111126012529_AddCommand_thumb.png)
 
 That’s it, now you will be able to new button appeared in the standard toolbar. If you click on that, it will automatically attach your web project to the running application in the development server.
 
-![Visual Studio Toolbar after Customization](//static.rajeeshcv.com/images/2011/11/20111126012540_AttachToProcess_thumb.png)
+![Visual Studio Toolbar after Customization](/images/2011/11/20111126012540_AttachToProcess_thumb.png)
 
 **Note:** There are couples of problems here
 

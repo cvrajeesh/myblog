@@ -1,24 +1,26 @@
 title: "It’s Better to Automate, Instead of Checklists"
 date: 2010-09-20 12:46:38
 tags:
+
 - Misc
+
 ---
 
 In my day to day activities I have seen many checklists like
 
 1. [Code review](http://en.wikipedia.org/wiki/Code_review) checklist
 2. Source control check-in checklist
-2. Developer checklist
+3. Developer checklist
 
-All these are good because it helps to reduce failures but does everyone follow these all the time?. Sometimes I (or any developer) forgot to go through the checklist due to many reasons like time constraints, lack of concentration etc… and I don’t think we should blame anyone for missing this because - *We all are humans and we tends to forget*.
+All these are good because it helps to reduce failures but does everyone follow these all the time?. Sometimes I (or any developer) forgot to go through the checklist due to many reasons like time constraints, lack of concentration etc… and I don’t think we should blame anyone for missing this because - _We all are humans and we tends to forget_.
 
-Only way we could reduce these mistakes is to automate!!! wherever possible. In my current project, all the aspx page should have direction(dir) attribute in the html tag as part of the localization work. As usual an email with  checklist for localizing an aspx page was sent to all the developers, out of that one item was to include `dir` attribute whenever they add new aspx file.
+Only way we could reduce these mistakes is to automate!!! wherever possible. In my current project, all the aspx page should have direction(dir) attribute in the html tag as part of the localization work. As usual an email with checklist for localizing an aspx page was sent to all the developers, out of that one item was to include `dir` attribute whenever they add new aspx file.
 
 Everybody followed this in the initial stages but later we started forgetting about this requirement, which caused extra hours of effort to fix it in all the pages.
 
 It could have been avoided if we had a automated process which verifies this. In order to automate, one way is to write a custom MSBuild task which could verify whether a aspx file has `dir` attribute, if it doesn’t fails build (this whole idea came from http://blogs.msdn.com/b/simonince/archive/2009/07/10/enforcing-unobtrusive-javascript.aspx). If you want to learn about writing a custom MSBuild task, I suggest http://msdn.microsoft.com/en-us/library/t9883dzc.aspx.
 
-So here is the  code which creates this custom MS Build task
+So here is the code which creates this custom MS Build task
 
 ```cs
 using System.Linq;
@@ -150,6 +152,7 @@ For including this in the your web project, open the project file in a text edit
     <HTMLCodingStandard SourceFiles="@(Content)" ExcludeFiles="@(ExcludedContents)" />
   </Target>
 ```
+
 Hope this helps you.
 
-> Download code sample from [here](//static.rajeeshcv.com/download/TestWebApplication.zip)
+> Download code sample from [here](/download/TestWebApplication.zip)

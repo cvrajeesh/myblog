@@ -23,7 +23,7 @@ First I thought this is easy and created the following styles
 
 This produces a wrong result - if `child1` takes 100px I expected `child2` to be 400px, but the height was 500px.
 
-![Child2 takes full height](//static.rajeeshcv.com/images/2015/Fill_height_div.PNG)
+![Child2 takes full height](/images/2015/Fill_height_div.PNG)
 
 There are many ways to fix this. One easy way is using `display:table-row`. Here is fixed CSS
 

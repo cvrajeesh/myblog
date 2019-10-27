@@ -1,7 +1,9 @@
 title: "Logging Execution Time Using AOP"
 date: 2010-02-27 11:42:22
 tags:
+
 - C#
+
 ---
 
 What happens if your client complains that your application is running very slow!!! or in your load/stress testing you found that some functionalities are very slow in executing than expected. This is the time where you go for profiling the execution, to analyse the root cause of these issues.
@@ -16,13 +18,13 @@ With the help of **AOP (Aspect-Oriented Programming)** we could do the profiling
 AOP is a programming paradigm in which secondary or supporting functions are isolated from the main program's business logic
 {% endblockquote %}
 
-So in order bring the AOP functionality into this application, I am going to use a third party library [PostSharp]  which I believe this is one of the best that is available in the market.
+So in order bring the AOP functionality into this application, I am going to use a third party library [PostSharp] which I believe this is one of the best that is available in the market.
 
 So, now we have got the basic things to start with and now let’s start coding….
 
 Start a new solution in visual studio and add a new console application project to it. Then add the below references to the newly created project
 
-Add reference to the *Log4Net.dll*, *PostSharp.Laos.dll* and *PostSharp.Public.dll* (Please read  https://www.postsharp.net/documentation to get the basic installation procedure). Next, create a new attribute class called `ProfileMethodAttribute` – this class is responsible for doing the profiling work. Make sure that you have decorated this class with `Serializable` attribute
+Add reference to the _Log4Net.dll_, _PostSharp.Laos.dll_ and _PostSharp.Public.dll_ (Please read https://www.postsharp.net/documentation to get the basic installation procedure). Next, create a new attribute class called `ProfileMethodAttribute` – this class is responsible for doing the profiling work. Make sure that you have decorated this class with `Serializable` attribute
 
 ```cs
 [Serializable]
@@ -40,7 +42,7 @@ public class ProfileMethodAttribute : OnMethodBoundaryAspect
 }
 ```
 
-This class actually derives from `OnMethodBoundaryAspect`,  it has got two methods `OnEntry` and `OnExit` which we needed. These method will be called before the start of a method execution and at the end of method execution respectively, when this attribute is decorated against a method.
+This class actually derives from `OnMethodBoundaryAspect`, it has got two methods `OnEntry` and `OnExit` which we needed. These method will be called before the start of a method execution and at the end of method execution respectively, when this attribute is decorated against a method.
 
 When a call comes to `OnEntry` method, we will first log the execution call using the `LoggerHelper`, then start a clock using another helper class `Profiler`
 
@@ -278,7 +280,7 @@ PROFILING 2010-02-26 00:20:04,865 [1] Log MethodName : SimpleMethod, ExecutionTi
 
 Please least me know, if this helped you.
 
-> Download the demo code from [here](//static.rajeeshcv.com/download/ProfilingSample.zip)
+> Download the demo code from [here](/download/ProfilingSample.zip)
 
-[Log4Net]: http://logging.apache.org/log4net/
-[PostSharp]: https://www.postsharp.net
+[log4net]: http://logging.apache.org/log4net/
+[postsharp]: https://www.postsharp.net
