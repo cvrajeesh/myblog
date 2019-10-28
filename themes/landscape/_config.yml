@@ -1,9 +1,9 @@
 # Header
 menu:
   Home: /
-  About: /about
-  Projects: /projects
-  Archives: /archives
+  About: /about/
+  Projects: /projects/
+  Archives: /archives/
 rss: /atom.xml
 
 # Content
@@ -13,11 +13,11 @@ fancybox: true
 # Sidebar
 sidebar: right
 widgets:
-- category
-- tag
-- tagcloud
-- archive
-- recent_posts
+  - category
+  - tag
+  - tagcloud
+  - archive
+  - recent_posts
 
 # Miscellaneous
 google_analytics: UA-647217-9
