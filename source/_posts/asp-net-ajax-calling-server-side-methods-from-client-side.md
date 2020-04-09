@@ -1,7 +1,9 @@
 title: "ASP.NET AJAX - Calling Server Side methods from Client Side"
 date: 2008-10-24 00:53:13
 tags:
+
 - ASP.NET
+
 ---
 
 > {% post_link ASP-NET-AJAX-Passing-JSON-Object-from-Client-to-Server "Part2"%} - ASP.NET AJAX - Passing JSON Object from Client to Server
@@ -58,7 +60,7 @@ Below is the sample code
 ```
 
 ###Extra bits
-In the above code you can see that I have placed link, when user click on that link a message is shown with the server time. So behind an asynchronous request is send to the server in this format *http://[sitename]/[MethodName]*. Server in turn returns the result as JSON back to the client. Here is a screen shot from the firebug
+In the above code you can see that I have placed link, when user click on that link a message is shown with the server time. So behind an asynchronous request is send to the server in this format _http://[sitename]/[MethodName]_. Server in turn returns the result as JSON back to the client. Here is a screen shot from the firebug
 
 ![Firebug headers](/images/2008/10/image.png)
 
