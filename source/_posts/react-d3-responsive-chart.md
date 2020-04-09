@@ -16,7 +16,7 @@ Here is demo URL https://i5u7r.csb.app/ to play with and it looks like this
 
 Building D3 chart requires `width` and `height` values upfront, this helps D3 to map data points to an `x`, `y` coordinate on the SVG canvas. In this post we're creating a simple line chart with x-axis and y-axis and it resizes when the browser window is resized and axes ticks are updated based on the available width and height.
 
-First we need a way to get `width` and `height` values and it should update when the browser window is resized. For this, I'm creating a custom resize hook called `useResize`, which returns the size of HTML element passed to it.
+First, we need a way to get `width` and `height` values and it should update when the browser window is resized. For this, I'm creating a custom resize hook called `useResize`, which returns the size of HTML element passed to it.
 
 ```js
 function useResize(ref) {
@@ -47,7 +47,7 @@ function useResize(ref) {
 
 > Make sure `getSize` method is not called frequently to reduce the number of updates. Here, I'm using `debounce` helper function from `lodash`.
 
-In my chart component, `ref` of my root element is passed to `useResize` hook to get it's size.
+In my chart component, `ref` of my root element is passed to `useResize` hook to get its size.
 
 ```jsx
 const LineChart = props => {
@@ -63,7 +63,7 @@ const LineChart = props => {
 };
 ```
 
-Once we've this in place, implementing a line chart is straight forward. However to make the axes responsive, i.e. change it's tick based on the available size. Pass a ratio based on `width` or `height` to the `ticks` method of both axes.
+Once we have this in place, implementing a line chart is straight forward. However to make the axes responsive, i.e. change its tick based on the available size. Pass a ratio based on `width` or `height` to the `ticks` method of both axes.
 
 ```js
 const { width, height } = size;
@@ -91,4 +91,4 @@ Here is the full working demo running in [CodeSandbox](https://codesandbox.io/s/
    ></iframe>
 {% endraw %}
 
-Hope you enjoyed this, happy coding.
+I hope you enjoyed this article, happy coding.
