@@ -1,17 +1,18 @@
 title: "How to Move Directories Across SVN Repositories"
 date: 2011-11-15 15:11:45
 tags:
-- Misc
----
 
+- Misc
+
+---
 
 Recently we were restructuring our project repositories, where I had to move a project from it’s own repository to another repository.
 
 When do a move under SVN you need to make sure that the history is not lost, so I will explain two common scenarios and how you could do the SVN move
 
-###Scenario 1 - Moving files or directories with in a SVN repository
+### Scenario 1 - Moving files or directories with in a SVN repository
 
-Below is a screen shot of my existing repository and I want to move the **configuration** directory to the **project**  directory without loosing the history.
+Below is a screen shot of my existing repository and I want to move the **configuration** directory to the **project** directory without loosing the history.
 
 ![SVN repository structure](/images/2011/11/20111115081425_Screen1_thumb.png)
 
@@ -25,11 +26,11 @@ Here are the steps
    ![Context Menu with move](/images/2011/11/20111115081432_Screen2_thumb.png)
 4. Now commit the changes back to the repository.
 
-Don’t forget to uncheck *Stop on copy/rename* option in the *Log messages* dialog if you are trying to see the history of the moved directory.
+Don’t forget to uncheck _Stop on copy/rename_ option in the _Log messages_ dialog if you are trying to see the history of the moved directory.
 
 ![Move configuration](/images/2011/11/20111115081442_Screen3_thumb.png)
 
-###Scenario 2 – Moving directories across SVN repositories
+### Scenario 2 – Moving directories across SVN repositories
 
 In this case I want to move **Project** directory to another repository **Repo2**
 
