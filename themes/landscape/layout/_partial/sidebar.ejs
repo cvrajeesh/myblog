@@ -1,4 +1,10 @@
 <aside id="sidebar"<% if (theme.sidebar === 'bottom'){ %> class="outer"<% } %>>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Clodui</h3>
+    <div class="widget">
+      Planning to host your static website?. Checkout <a href="https://www.clodui.com" target="_blank">Clodui</a>, it deploys your static website under a minute and optimizes for speed automatically.
+    </div>
+  </div>
   <% theme.widgets.forEach(function(widget){ %>
     <%- partial('_widget/' + widget) %>
   <% }) %>
