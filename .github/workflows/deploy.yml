@@ -1,0 +1,44 @@
+name: Deploy website
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: "https://registry.npmjs.org"
+          scope: "@clodui"
+
+      - name: Generate blog
+        run: |
+          yarn install
+          yarn run generate
+
+      - name: Install Clodui cli
+        run: |
+          sudo apt-get install libsecret-1-dev
+          npm i @clodui/cli -g
+          clodui --version
+
+      - name: Deploying blog to production
+        if: github.ref == 'refs/heads/master'
+        run: clodui deploy create -vvv -w ${CLODUI_WEBSITE} --publish -s ${GITHUB_WORKSPACE}/public
+        env:
+          CLODUI_USERNAME: ${{ secrets.CLODUI_USERNAME }}
+          CLODUI_PASSWORD: ${{ secrets.CLODUI_PASSWORD }}
+          CLODUI_WEBSITE: ${{ secrets.CLODUI_WEBSITE }}
+
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: clodui-cli.log
+          path: clodui.log
