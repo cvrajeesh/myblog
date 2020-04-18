@@ -21,6 +21,6 @@
   },
   "scripts": {
     "start": "hexo server",
-    "generate": "hexo generate -b -f"
+    "generate": "hexo generate -b -f -d"
   }
 }
