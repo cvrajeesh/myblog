@@ -1190,10 +1190,10 @@ hexo-cli@^3.0.0:
     resolve "^1.11.0"
     tildify "^2.0.0"
 
-hexo-deployer-clodui@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/hexo-deployer-clodui/-/hexo-deployer-clodui-1.1.0.tgz#acdc633b43e30e6704f616f2c433fe1112f751a9"
-  integrity sha512-hem6BGvuS3jQbiUzUyJjEDvlpTCCiknep6175Gxx1uMVDdODNonRmOFWmt/99phBNIQgb3UBWU6DU4CGZo9iCQ==
+hexo-deployer-clodui@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/hexo-deployer-clodui/-/hexo-deployer-clodui-1.1.1.tgz#f55ffc6e69ebaaa859498f5d7d2bd716241d710c"
+  integrity sha512-VxSxx8DKBa+9hupokzCs71qOxr541OyklVTCbBFIvdn3llVduJT+/07dy2YT7hDYetAVFWZF8C54Okg5VUq6pQ==
   dependencies:
     "@clodui/cli" "^0.6.2"
     ora "^4.0.3"
